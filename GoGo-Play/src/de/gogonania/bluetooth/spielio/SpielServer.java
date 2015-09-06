@@ -36,7 +36,6 @@ public abstract class SpielServer{
 	public void init(){}
 	public void create(){}
 	
-	public boolean isSaveAble(){return this instanceof Saveable;}
 	public void send(IPerson p, Object o){getServer().getWarteschlange().send(o, p);}
 	public String getData(){return "";}
 	public boolean isInGame(){return ingame;}
