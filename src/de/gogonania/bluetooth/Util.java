@@ -126,7 +126,7 @@ public class Util implements ApplicationListener{
 	public static boolean isNumeric(String s){try{Integer.parseInt(s); return true;}catch(Exception e){return false;}}
 	public static Runnable getRunnable(final Szene s, final boolean v){return new Runnable(){public void run(){if(v){Util.vib();} else{} setSzene(s);}};}
 	public static void error(Exception e){notificationRed("Fehler! "+e.getClass().getSimpleName()+"\n"+e.getMessage()+""); e.printStackTrace();}
-	public static String makeNiceGeld(long geld){return makeNiceZahl(geld)+" €";}
+	public static String makeNiceGeld(long geld){return makeNiceZahl(geld)+" â‚¬";}
 	public static Szene instanceCurrentScreen(){try{return getSzene().getClass().newInstance();}catch(Exception e){Util.error(e);} return null;}
 	public static String getText(boolean b){return b?"ja":"nein";}
 	public static boolean chance(int c){return random(1, 100) <= c;}

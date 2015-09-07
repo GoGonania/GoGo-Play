@@ -1,4 +1,5 @@
 package de.gogonania.bluetooth.spielio.spiele;
+import de.gogonania.bluetooth.spielio.Saveable;
 import de.gogonania.bluetooth.spielio.SpielServer;
 import de.gogonania.bluetooth.io.IPerson;
 import de.gogonania.bluetooth.spielio.spiele.gogocraft.Biom;
@@ -9,7 +10,7 @@ import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.SelectListener;
 import de.gogonania.bluetooth.Util;
 
-public class ServerGoGoCraft extends SpielServer{
+public class ServerGoGoCraft extends SpielServer implements Saveable{
 	private Biom currentBiom = Biom.Normal;
 	private ArrayList<Material> blocks = new ArrayList<Material>();
 	private int inaline = 16;
@@ -23,7 +24,7 @@ public class ServerGoGoCraft extends SpielServer{
 		}
 	}
 	
-	public void start(){
+	public void startThread(){
 		while(isRunning()){
 			Util.sleep(300);
 			tickAll();
@@ -69,5 +70,18 @@ public class ServerGoGoCraft extends SpielServer{
 		}
 		blocks = blocks.substring(1);
 		return ""+currentBiom.name()+"<>"+inaline+"<>"+blocks+"";
+	}
+
+	public String spielstandSave() {
+		return getData();
+	}
+
+	public void spielstandLoad(String data) {
+		String[] dataparts = data.split("<>");
+		currentBiom = Biom.valueOf(dataparts[0]);
+		inaline = Integer.parseInt(dataparts[1]);
+		for(String m : dataparts[2].split("-")){
+			blocks.add(Material.valueOf(m));
+		}
 	}
 }

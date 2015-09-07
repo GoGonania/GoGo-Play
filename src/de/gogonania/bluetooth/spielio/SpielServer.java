@@ -4,6 +4,7 @@ import de.gogonania.bluetooth.io.GameUtil;
 import de.gogonania.bluetooth.io.IPerson;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.packete.PacketScreen;
+import de.gogonania.bluetooth.spielio.save.Spielsave;
 import de.gogonania.bluetooth.szenen.SzeneGameLoading;
 import de.gogonania.bluetooth.io.PlayerInfo;
 import de.gogonania.bluetooth.packete.PacketBereit;
@@ -14,28 +15,37 @@ public abstract class SpielServer{
 	
 	public abstract void onPacket(IPerson p, Object o);
 	
-	public SpielServer(){
+	public void start(final Spielsave s){
 		t = new Thread(new Runnable(){
 			public void run(){
 				while(!i() && getServer().inLobby()){Util.sleep(50);}
 				if(i()) return;
-				init();
+				preInit(s);
 				send(PacketScreen.create(SzeneGameLoading.class));
 				while(!i() && !sindAlleBereit()){Util.sleep(50);}
 				if(i()) return;
 				send(new PacketBereit());
 				ingame = true;
-				start();
-				
+				startThread();
 			}
 		});
 		t.start();
 	}
 	
-	public void start(){}
+	private void preInit(Spielsave s){
+		if(s != null){
+			getSaveable().spielstandLoad(s.getData());
+		} else{
+			init();
+		}
+	}
+	
+	public void startThread(){}
 	public void init(){}
 	public void create(){}
 	
+	public Saveable getSaveable(){return (Saveable) this;}
+	public boolean isSaveAble(){return this instanceof Saveable;}
 	public void send(IPerson p, Object o){getServer().getWarteschlange().send(o, p);}
 	public String getData(){return "";}
 	public boolean isInGame(){return ingame;}

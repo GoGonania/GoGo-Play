@@ -18,7 +18,7 @@ public class ScreenChooseGame extends ScreenAktionenBase{
 			add(s.getInfo().getName()+"\n\n("+s.getInfo().getPlayerText()+" Spieler)", new Runnable(){
 					public void run(){
 						Util.vib();
-						GameUtil.registerServer(form.getValues(), s);
+						GameUtil.registerServer(form.getValues(), s, null);
 					}
 			});
 		}

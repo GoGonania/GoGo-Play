@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Addons{
 	public ArrayList<Addon> addons = new ArrayList<Addon>();
-	public long perclick;
+	public long perclick = 1;
 	
 	public Addons(){
 		add("Toilette", 100, 1);

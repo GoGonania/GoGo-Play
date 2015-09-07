@@ -6,6 +6,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
+import de.gogonania.bluetooth.Spielstand;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.packete.PacketBereit;
 import de.gogonania.bluetooth.packete.PacketChanged;
@@ -23,6 +24,7 @@ import de.gogonania.bluetooth.packete.PacketServerInfo;
 import de.gogonania.bluetooth.screens.ScreenLobby;
 import de.gogonania.bluetooth.spielio.Spiel;
 import de.gogonania.bluetooth.spielio.SpielServer;
+import de.gogonania.bluetooth.spielio.save.Spielsave;
 
 public class GameServer {
 	private Spiel spiel;
@@ -31,11 +33,13 @@ public class GameServer {
 	private String detail;
 	private boolean lobby = true;
 	private Server s;
-	private SpielServer gs;
+	public SpielServer gs;
 	private Warteschlange w;
 	private boolean shutdown;
 	public ArrayList<IPerson> personen = new ArrayList<IPerson>();
 	private GameInfo info = new GameInfo();
+	private String[] para;
+	private Spielsave save;
 	
 	public void onPacket(final Connection c, IPerson p, Object o){
 		if(o instanceof PacketRequestInfo){
@@ -98,10 +102,6 @@ public class GameServer {
 		}
 	}
 	
-	public void initServer(){
-		gs.init();
-	}
-	
 	public void startGame(){
 		lobby = false;
 	}
@@ -111,7 +111,8 @@ public class GameServer {
 		PersonIch p = new PersonIch(false);
 		w.send(createInfo(), p);
 		add(p);
-		gs.create();
+		gs.start(save);
+		if(save == null) gs.create();
 		Util.setSzene(new ScreenLobby());
 	}
 	
@@ -137,11 +138,13 @@ public class GameServer {
 		sendMessage(""+p.getName()+" ist dem Spiel beigetreten", "g");
 	}
 
-	public GameServer(String[] p, Spiel spiel){
+	public GameServer(String[] p, Spiel spiel, Spielsave save){
 		this.spiel = spiel;
 		this.name = p[0];
 		this.detail = p[1];
 		this.passwort = p[2];
+		para = p;
+		this.save = save;
 		w = new Warteschlange();
 		try {
 			s = Wifi.server();
@@ -190,6 +193,11 @@ public class GameServer {
 		for(IPerson p : personen){
 			w.send(o, p);
 		}
+	}
+	
+	public void save(){
+		Spielsave s = new Spielsave(Spielstand.saveSpiele.create());
+		s.create(spiel.getTyp(), para, gs.getSaveable().spielstandSave());
 	}
 	
 	public void close(){

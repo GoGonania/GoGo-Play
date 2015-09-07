@@ -1,5 +1,6 @@
 package de.gogonania.bluetooth.spielio;
 
-public class Saveable
-{
+public interface Saveable{
+	public String spielstandSave();
+	public void spielstandLoad(String data);
 }

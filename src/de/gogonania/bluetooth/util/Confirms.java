@@ -2,6 +2,7 @@ package de.gogonania.bluetooth.util;
 import de.gogonania.bluetooth.io.Wifi;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.screens.ScreenMain;
+import de.gogonania.bluetooth.spielio.save.Spielsave;
 import de.gogonania.bluetooth.io.GameUtil;
 import de.gogonania.bluetooth.io.IPerson;
 import de.gogonania.bluetooth.packete.PacketKick;
@@ -64,6 +65,14 @@ public class Confirms{
 		} else{
 			Confirms.closeGameClient();
 		}
+	}
+	
+	public static void removeSpielstand(final Spielsave s){
+		c("diesen Spielstand:", s.getDetail()+" löschen", new Runnable(){
+			public void run() {
+				s.remove();
+				Util.refreshScreen();
+			}});
 	}
 	
 	private static void c(String m, String t, final Runnable r){

@@ -20,6 +20,7 @@ public class ScreenMain extends ScreenBase{
 	public String getTitle(){return "Startseite";}
 	
 	public void open(){
+		setAction("Spielstände verwalten", new ScreenSpielstände());
 		setAction("Entwickler-Bereich", new ScreenDebug());
 		setAction("Einstellungen", new ScreenEinstellungen());
 		setActionButtonText("Menü");

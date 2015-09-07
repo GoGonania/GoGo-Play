@@ -15,7 +15,7 @@ public class ClientGoGoCraft extends SpielClient{
 	public ArrayList<Block> blocks = new ArrayList<Block>();
 	public int inaline;
 	public Biom currentBiom;
-	public Inventar inv;
+	public Inventar inv = new Inventar();
 	
 	public void onPacket(Object o){
 		if(o instanceof PacketBlock){
@@ -31,7 +31,6 @@ public class ClientGoGoCraft extends SpielClient{
 		for(String m : dataparts[2].split("-")){
 			blocks.add(new Block(Material.valueOf(m), blocks.size()));
 		}
-		inv = new Inventar();
 		final float height = Gdx.graphics.getHeight() / ((float) currentBiom.getStufen());
 	    Grid g = new Grid(inaline, 0, 1){public float getHeight(){return height;}};
 		for(Block b : blocks){

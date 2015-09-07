@@ -3,10 +3,14 @@ package de.gogonania.bluetooth;
 import android.content.Context;
 import android.content.SharedPreferences;
 import de.gogonania.bluetooth.objekte.overlays.Overlays;
+import de.gogonania.bluetooth.spielio.save.Spielsave;
+import de.gogonania.bluetooth.spielio.save.Spielsaves;
+import de.gogonania.bluetooth.util.io.SaveItem;
 import de.gogonania.bluetooth.util.io.SaveManager;
 
 public class Spielstand{
 	public static SaveManager saveOverlays;
+	public static SaveManager saveSpiele;
 	
 	static SharedPreferences sp;
 	static SharedPreferences.Editor spe;
@@ -36,5 +40,15 @@ public class Spielstand{
 		Util.vib = sp.getBoolean("vib", true);
 
 		saveOverlays = new SaveManager("0");
+		saveSpiele = new SaveManager("1");
+		
+		for(SaveItem s: saveSpiele.list()){
+			Spielsave ss = new Spielsave(s);
+			if(ss.istKompatibel()){
+				Spielsaves.saves.add(new Spielsave(s));
+			} else{
+				ss.remove();
+			}
+		}
 	}
 }
