@@ -93,10 +93,6 @@ public class GameServer {
 		}
 	}
 	
-	public void startGame(){
-		lobby = false;
-	}
-	
 	public void doStuff(){
 		gs = spiel.getServer();
 		PersonIch p = new PersonIch(false);
@@ -131,9 +127,9 @@ public class GameServer {
 
 	public GameServer(String[] p, Spiel spiel, Spielsave save){
 		this.spiel = spiel;
-		this.name = p[0];
-		this.detail = p[1];
-		try{this.passwort = p[2];}catch(Exception e){passwort = "";}
+		name = p[0];
+		try{detail = p[1];}catch(Exception e){detail = "";}
+		try{passwort = p[2];}catch(Exception e){passwort = "";}
 		para = p;
 		this.save = save;
 		w = new Warteschlange();
@@ -223,6 +219,7 @@ public class GameServer {
 			}}).start();
 	}
 	
+	public void startGame(){lobby = false;}
 	public Warteschlange getWarteschlange(){return w;}
 	public GameInfo getInfo(){return info;}
 	public boolean inLobby(){return lobby;}

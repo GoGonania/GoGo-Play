@@ -83,14 +83,14 @@ public class Confirms{
 	}
 	
 	public static void removeSpielstand(){
-		if(!Spielsaves.hatSpielstände()) return;
+		if(!Spielsaves.hatSpielstände())
 		c("alle", "Spielstände löschen", new Runnable(){
 			public void run(){
 				while(Spielsaves.hatSpielstände()){
 					Util.random(Spielsaves.saves).remove();
 				}
 				Util.notificationRed("Alle Spielstände wurden gelöscht");
-				if(Util.getSzene() instanceof ScreenSpielstände) Util.refreshScreen();
+				if(Util.getSzene() instanceof ScreenSpielstände){Util.setSzene(new ScreenMain());}else{Util.refreshScreen();}
 			}
 		});
 	}

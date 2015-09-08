@@ -39,17 +39,14 @@ public class Input extends TextObjekt{
 	}
 
 	public void render(){
+		Szene.x.begin(ShapeRenderer.ShapeType.Line);
+		Szene.x.setColor(getTextColor());
+		Szene.x.rect(getX(), getY(), getWidth(), 1);
 		if(!isHovered(Gdx.input.isTouched())){
-			setBorder(null);
-			Szene.x.begin(ShapeRenderer.ShapeType.Line);
-			Szene.x.setColor(getTextColor());
-			Szene.x.rect(getX(), getY(), getWidth(), 1);
 			Szene.x.rect(getX(), getY(), 1, getHeight()/5F);
 			Szene.x.rect(getX()+getWidth(), getY(), 1, getHeight()/5F);
-			Szene.x.end();
-		} else{
-			setBorder(getTextColor());
 		}
+		Szene.x.end();
 		super.render();
 	}
 

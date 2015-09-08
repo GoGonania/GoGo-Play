@@ -13,6 +13,7 @@ import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.SliderListener;
 import de.gogonania.bluetooth.util.Confirms;
+import de.gogonania.bluetooth.spielio.save.Spielsaves;
 
 public class ScreenEinstellungen extends ScreenAktionenBase{
     public Szene getPreSzene(){
@@ -42,12 +43,16 @@ public class ScreenEinstellungen extends ScreenAktionenBase{
 			}
 		});
 		
-		add("Alle Spielstände\nlöschen", Bilder.cred, new Runnable(){
-				public void run(){
-					Util.vib();
-					Confirms.removeSpielstand();
-				}
-			});
+		if(Spielsaves.hatSpielstände()){
+			add("Alle Spielstände\nlöschen", Bilder.cred, new Runnable(){
+					public void run(){
+						Util.vib();
+						Confirms.removeSpielstand();
+					}
+				});
+		} else{
+			skip(1);
+		}
 		
 		skip(2);
 		
