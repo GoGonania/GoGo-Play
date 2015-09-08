@@ -29,6 +29,10 @@ public class SzeneGameLoading extends SzeneLoading{
 				hideWait(true);
 				b.setHide(false);
 				loaded = true;
+				if(GameUtil.isOwner() && GameUtil.game.server.personen.size() == 1){
+					while(Util.isSwitching()){Util.sleep(20);}
+					b.click();
+				}
 			}
 		}, ""+GameUtil.game.getSpielName()+" wird geladen...");
 		b = setBigButton("Ich bin bereit!", new Runnable(){

@@ -9,47 +9,52 @@ import com.badlogic.gdx.utils.Align;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.Listener;
+import de.gogonania.bluetooth.Szene;
 
 public class Input extends TextObjekt{
 	private String label;
 	private boolean empty;
-	private boolean zahl;
 	
-	public Input(String text, String label, float x, float y, float width, float height, BitmapFont f, boolean empty, boolean zahl){
+	public Input(String text, String label, float x, float y, float width, float height, BitmapFont f, boolean empty){
 		super("", x, y, width, height, null, Color.WHITE, f);
 		setText(text);
 		setAlignment(Align.left);
 		this.label = label;
 		this.empty = empty;
-		this.zahl = zahl;
 	}
 	
 	public void click(){
-		Fenster.prompt("", label + " "+getVerb()+"", getText(), new Listener(){
+		Fenster.prompt("Bitte hier eingeben:", label + " "+getVerb()+"", getText(), new Listener(){
 				public void ready(String s){
 					if(s != null){
 						s = s.trim();
 						if(!empty && s.isEmpty()){
 							Util.notificationRed(""+label+" darf nicht leer sein");
 						} else{
-							if(!zahl || Util.isNumeric(s)){
-								setText(s);
-							} else{
-								Util.notificationRed("Das ist keine Zahl!");
-							}
+							setText(s);
 						}
 					}
 				}
 			});
 	}
 
-	public void render(ShapeRenderer x, SpriteBatch batch){
-		setBorder(isHovered(Gdx.input.isTouched())?null:Color.WHITE);
-		super.render(x, batch);
+	public void render(){
+		if(!isHovered(Gdx.input.isTouched())){
+			setBorder(null);
+			Szene.x.begin(ShapeRenderer.ShapeType.Line);
+			Szene.x.setColor(getTextColor());
+			Szene.x.rect(getX(), getY(), getWidth(), 1);
+			Szene.x.rect(getX(), getY(), 1, getHeight()/5F);
+			Szene.x.rect(getX()+getWidth(), getY(), 1, getHeight()/5F);
+			Szene.x.end();
+		} else{
+			setBorder(getTextColor());
+		}
+		super.render();
 	}
 
-	public void renderText(SpriteBatch batch, String text){
-		super.renderText(batch, isHovered(Gdx.input.isTouched())?" "+label+" "+getVerb()+"":text);
+	public void renderText(String text){
+		super.renderText(isHovered(Gdx.input.isTouched())?" "+label+" "+getVerb()+"":text);
 	}
 
 	private String getVerb(){return getText().isEmpty()?"setzen":"ändern";}

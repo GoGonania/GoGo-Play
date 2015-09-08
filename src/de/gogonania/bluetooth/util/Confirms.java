@@ -9,6 +9,8 @@ import de.gogonania.bluetooth.packete.PacketKick;
 import java.util.ArrayList;
 import de.gogonania.bluetooth.packete.PacketMessage;
 import de.gogonania.bluetooth.io.Person;
+import de.gogonania.bluetooth.spielio.save.Spielsaves;
+import de.gogonania.bluetooth.screens.ScreenSpielstände;
 
 public class Confirms{
 	public static void closeGameClient(){
@@ -71,8 +73,33 @@ public class Confirms{
 		c("diesen Spielstand:", s.getDetail()+" löschen", new Runnable(){
 			public void run() {
 				s.remove();
-				Util.refreshScreen();
+				Util.notificationRed(s.getDetail()+" wurde gelöscht");
+				if(Spielsaves.saves.isEmpty()){
+					Util.setSzene(new ScreenMain());
+				} else{
+					Util.refreshScreen();
+				}
 			}});
+	}
+	
+	public static void removeSpielstand(){
+		if(!Spielsaves.hatSpielstände()) return;
+		c("alle", "Spielstände löschen", new Runnable(){
+			public void run(){
+				while(Spielsaves.hatSpielstände()){
+					Util.random(Spielsaves.saves).remove();
+				}
+				Util.notificationRed("Alle Spielstände wurden gelöscht");
+				if(Util.getSzene() instanceof ScreenSpielstände) Util.refreshScreen();
+			}
+		});
+	}
+	
+	public static void saveGame(final Spielsave s){
+		c("diesen Spielstand:", s.getDetail()+" überschreiben", new Runnable(){
+				public void run() {
+					GameUtil.game.server.save(s);
+				}});
 	}
 	
 	private static void c(String m, String t, final Runnable r){

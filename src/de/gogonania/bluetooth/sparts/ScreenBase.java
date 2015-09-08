@@ -35,25 +35,19 @@ public abstract class ScreenBase extends Szene{
 		action = new Button("", Gdx.graphics.getWidth()-actionwidth-getBarItemsMargin(), Gdx.graphics.getHeight()-getBarHeight()+getBarItemsMargin(), actionwidth, getBarHeight()-2*getBarItemsMargin(), Bilder.normal, Color.BLACK){
 			public void click(){
 				Util.vib();
-				if(actions.size() == 1){
-					actions.get(0).run();
-				} else{
-					Fenster.select(action.getText(), actiontext.toArray(), false, new SelectListener() {
+				Fenster.select(action.getText(), actiontext.toArray(), false, new SelectListener() {
 						public void selected(int id) {
 							actions.get(id).run();
 						}
-					});
-				}
+				   });
 			}
 		};
 		action.setHide(true);
 		Logo logo = new Logo(0, Gdx.graphics.getHeight()-getBarHeight(), getBarHeight());
-		logo.setBorder(Color.BLACK);
-		setObjekte(action, logo);
-		TextObjekt bar = new TextObjekt(" "+getTitle(), getBarHeight(), Gdx.graphics.getHeight()-getBarHeight(), Gdx.graphics.getWidth()-getBarHeight(), getBarHeight(), Bilder.clgray, Color.BLACK, fontbigbig);
+		TextObjekt bar = new TextObjekt(" "+getTitle(), getBarHeight(), Gdx.graphics.getHeight()-getBarHeight(), Gdx.graphics.getWidth()-getBarHeight(), getBarHeight(), Bilder.bar, Color.BLACK, fontbigbig);
 		bar.setActive(false);
 		bar.setAlignment(Align.left);
-		setObjekt(bar);
+		setObjekte(action, logo, bar);
 		super.onOpen();
 		onUpdate();
 	}

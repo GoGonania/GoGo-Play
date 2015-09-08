@@ -1,30 +1,21 @@
 package de.gogonania.bluetooth.io;
 
-import java.util.ArrayList;
+import de.gogonania.bluetooth.packete.*;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-
 import de.gogonania.bluetooth.Spielstand;
 import de.gogonania.bluetooth.Util;
-import de.gogonania.bluetooth.packete.PacketBereit;
-import de.gogonania.bluetooth.packete.PacketChanged;
-import de.gogonania.bluetooth.packete.PacketData;
-import de.gogonania.bluetooth.packete.PacketJoin;
-import de.gogonania.bluetooth.packete.PacketJoined;
-import de.gogonania.bluetooth.packete.PacketKick;
-import de.gogonania.bluetooth.packete.PacketMessage;
-import de.gogonania.bluetooth.packete.PacketPause;
-import de.gogonania.bluetooth.packete.PacketPing;
-import de.gogonania.bluetooth.packete.PacketPlayerList;
-import de.gogonania.bluetooth.packete.PacketRequestData;
-import de.gogonania.bluetooth.packete.PacketRequestInfo;
-import de.gogonania.bluetooth.packete.PacketServerInfo;
 import de.gogonania.bluetooth.screens.ScreenLobby;
 import de.gogonania.bluetooth.spielio.Spiel;
 import de.gogonania.bluetooth.spielio.SpielServer;
 import de.gogonania.bluetooth.spielio.save.Spielsave;
+import de.gogonania.bluetooth.spielio.save.Spielsaves;
+import de.gogonania.bluetooth.util.Confirms;
+import de.gogonania.bluetooth.util.Fenster;
+import de.gogonania.bluetooth.util.SelectListener;
+import java.util.ArrayList;
 
 public class GameServer {
 	private Spiel spiel;
@@ -142,7 +133,7 @@ public class GameServer {
 		this.spiel = spiel;
 		this.name = p[0];
 		this.detail = p[1];
-		this.passwort = p[2];
+		try{this.passwort = p[2];}catch(Exception e){passwort = "";}
 		para = p;
 		this.save = save;
 		w = new Warteschlange();
@@ -195,9 +186,28 @@ public class GameServer {
 		}
 	}
 	
-	public void save(){
-		Spielsave s = new Spielsave(Spielstand.saveSpiele.create());
+	public void save(Spielsave s){
 		s.create(spiel.getTyp(), para, gs.getSaveable().spielstandSave());
+		Util.notificationGreen("Spiel wurde gespeichert!");
+	}
+	
+	public void save(){
+		String[] o = new String[Spielsaves.saves.size()+1];
+		for(int i = 0; i < Spielsaves.saves.size(); i++){
+			o[i] = Spielsaves.saves.get(i).getDetail();
+		}
+		o[o.length-1] = "Neuen Spielstand anlegen...";
+		Fenster.select("Wo willst du das Spiel speichern?", o, false, new SelectListener(){
+				public void selected(int id){
+					if(id < Spielsaves.saves.size()){
+						Confirms.saveGame(Spielsaves.saves.get(id));
+					} else{
+						Spielsave s = new Spielsave(Spielstand.saveSpiele.create());
+						Spielsaves.saves.add(s);
+						save(s);
+					}
+				}
+			});
 	}
 	
 	public void close(){

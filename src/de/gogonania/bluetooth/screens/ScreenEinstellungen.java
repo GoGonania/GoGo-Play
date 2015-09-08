@@ -1,6 +1,7 @@
 package de.gogonania.bluetooth.screens;
 
-import java.io.File;import android.content.Intent;
+import java.io.File;
+import android.content.Intent;
 import android.net.Uri;
 import de.gogonania.bluetooth.Anim;
 import de.gogonania.bluetooth.MainActivity;
@@ -11,6 +12,7 @@ import de.gogonania.bluetooth.sparts.ScreenAktionenBase;
 import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.SliderListener;
+import de.gogonania.bluetooth.util.Confirms;
 
 public class ScreenEinstellungen extends ScreenAktionenBase{
     public Szene getPreSzene(){
@@ -18,7 +20,7 @@ public class ScreenEinstellungen extends ScreenAktionenBase{
 	}
 	
 	public String getTitle(){
-		return "Einstellungen v"+Util.getPackageInfo().versionName+"";
+		return "Einstellungen";
 	}
 	
 	public Anim getOpenAnimation(){
@@ -40,6 +42,15 @@ public class ScreenEinstellungen extends ScreenAktionenBase{
 			}
 		});
 		
+		add("Alle Spielstände\nlöschen", Bilder.cred, new Runnable(){
+				public void run(){
+					Util.vib();
+					Confirms.removeSpielstand();
+				}
+			});
+		
+		skip(2);
+		
 		add("Animationen", Util.a?Bilder.cgreen:Bilder.cred, new Runnable(){
 			public void run(){
 				Util.a = !Util.a;
@@ -55,20 +66,6 @@ public class ScreenEinstellungen extends ScreenAktionenBase{
 					Util.refreshScreen();
 				}
 			});
-		
-		add(""+Util.getAppName()+"\nweiterschicken", new Runnable(){
-			public void run() {
-				try{
-					String url = MainActivity.getThis().getApplicationInfo().publicSourceDir;
-					Intent intent = new Intent();  
-				    intent.setAction(Intent.ACTION_SEND);  
-				    intent.setType("application/vnd.android.package-archive");
-				    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(url)));
-				    MainActivity.getThis().startActivity(intent);
-				}catch(Exception e){e.printStackTrace();}
-			}});
-		
-		update();
 	}
 	
 	public int getItemsInARow() {

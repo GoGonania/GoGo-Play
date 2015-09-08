@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.util.Bild;
+import de.gogonania.bluetooth.Szene;
 
 public class Objekt{
 	private boolean activ = true;
@@ -21,26 +22,26 @@ public class Objekt{
 		this.cNormal = background;
 	}
 
-	public void render(ShapeRenderer x, SpriteBatch batch){
+	public void render(){
 		if(border != null){
-			x.begin(ShapeRenderer.ShapeType.Line);
-			x.setColor(border);
-			x.rect(getX()-1, getY()-1, getWidth()+2, getHeight()+2);
-			x.end();
+			Szene.x.begin(ShapeRenderer.ShapeType.Line);
+			Szene.x.setColor(border);
+			Szene.x.rect(getX()-1, getY()-1, getWidth()+2, getHeight()+2);
+			Szene.x.end();
 		}
 		
 		Bild b = getBild();
 		if(b != null){
 			if(b.hatColor() && !(this instanceof Button)){
-				x.begin(ShapeRenderer.ShapeType.Filled);
-				x.setColor(b.getColor());
-				x.rect(getX(), getY(), getWidth(), getHeight());
-				x.end();
+				Szene.x.begin(ShapeRenderer.ShapeType.Filled);
+				Szene.x.setColor(b.getColor());
+				Szene.x.rect(getX(), getY(), getWidth(), getHeight());
+				Szene.x.end();
 			} else{
-				batch.begin();
+				Szene.batch.begin();
 				b.getSprite().setBounds(getX(), getY(), getWidth(), getHeight());
-				b.getSprite().draw(batch, getAlpha());
-				batch.end();
+				b.getSprite().draw(Szene.batch, getAlpha());
+				Szene.batch.end();
 			}
 		}
 	}

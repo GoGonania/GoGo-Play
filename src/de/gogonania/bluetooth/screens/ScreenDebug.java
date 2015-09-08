@@ -8,6 +8,8 @@ import de.gogonania.bluetooth.Util;
 import com.badlogic.gdx.graphics.Color;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.SliderListener;
+import de.gogonania.bluetooth.Anim;
+import de.gogonania.bluetooth.Registry;
 
 public class ScreenDebug extends ScreenAktionenBase{
 	private Text debug;
@@ -17,11 +19,19 @@ public class ScreenDebug extends ScreenAktionenBase{
 	}
 
 	public Szene getPreSzene(){
-		return new ScreenMain();
+		return new ScreenExtras();
 	}
 
 	public String getTitle(){
-		return "Entwickler-Optionen";
+		return "Entwickler-Bereich";
+	}
+	
+	public Anim getOpenAnimation(){
+		return Registry.animations[1];
+	}
+
+	public Anim getCloseAnimation(){
+		return Registry.animations[1];
 	}
 	
 	public void open(){
@@ -35,7 +45,7 @@ public class ScreenDebug extends ScreenAktionenBase{
 						public void ok(int progress){
 							Util.rt = progress;
 						}
-					}, 0, 1000, Util.rt);
+					}, 0, 300, Util.rt);
 			}
 		});
 	}

@@ -4,4 +4,6 @@ import java.util.ArrayList;
 
 public class Spielsaves {
 	public static ArrayList<Spielsave> saves = new ArrayList<Spielsave>();
+	
+	public static boolean hatSpielstände(){return !saves.isEmpty();}
 }

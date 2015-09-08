@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 import de.gogonania.bluetooth.MainActivity;
 import de.gogonania.bluetooth.Util;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class GoGoFile extends File{
 	public GoGoFile(String path){
@@ -15,10 +18,11 @@ public class GoGoFile extends File{
 	public void write(String s){
 		if(!getParentFile().exists()) getParentFile().mkdirs();
 		try{
-			PrintWriter w = new PrintWriter(this);
-			w.print(s);
-			w.flush();
-			w.close();
+			FileOutputStream out = new FileOutputStream(this);
+			for(char c : s.toCharArray()){
+				out.write(c);
+			}
+			out.close();
 		} catch (IOException e){
 			Util.error(e);
 		}
@@ -27,11 +31,10 @@ public class GoGoFile extends File{
 	public String read(){
 		String s = "";
 		try{
-			Scanner sc = new Scanner(this);
-			while(sc.hasNext()){
-				s += sc.next();
-			}
-			sc.close();
+			InputStream in = new FileInputStream(this);
+			int b = 0;
+			while((b = in.read()) != -1){s += (char) b;}
+			in.close();
 			return s;
 		}catch(Exception e){
 			Util.error(e);

@@ -37,7 +37,7 @@ public abstract class Overlay extends Button implements Comparable<Overlay>{
 		r.run();
 	}
 	
-	public void render(ShapeRenderer s, SpriteBatch batch){
+	public void render(){
 		if((isHovered(Gdx.input.isTouched()) && Overlays.istGemeint(this)) || (f && Gdx.input.isTouched())){
 			f = true;
 			last = System.currentTimeMillis();
@@ -48,7 +48,7 @@ public abstract class Overlay extends Button implements Comparable<Overlay>{
 		} else{
 			f = false;
 		}
-		super.render(s, batch);
+		super.render();
 	}
 	
 	public float getScale(){return 1;}

@@ -17,6 +17,6 @@ public class Button extends TextObjekt{
 		return isHovered(Gdx.input.isTouched())?0.6F:1;
 	}
 	public float getScale(){
-		return isHovered(Gdx.input.isTouched())?0.9F:1;
+		return isHovered(Gdx.input.isTouched())?0.94F:1;
 	}
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import de.gogonania.bluetooth.Szene;
 
 public class Progress extends TextObjekt{
 	private Bild pb;
@@ -19,13 +20,13 @@ public class Progress extends TextObjekt{
 		setAlignment(Align.left);
 	}
 	
-	public void render(ShapeRenderer s, SpriteBatch batch){
-		super.render(s, batch);
-		batch.begin();
+	public void render(){
+		super.render();
+		Szene.batch.begin();
 		pb.getSprite().setBounds(getX()+m, getY()+m, (getWidth()-2*m)*p, getHeight()-2*m);
-		pb.getSprite().draw(batch);
-		batch.end();
-		if(!getText().isEmpty()) renderText(batch, getText());
+		pb.getSprite().draw(Szene.batch);
+		Szene.batch.end();
+		if(!getText().isEmpty()) renderText(getText());
 	}
 	
 	public void setProgress(float n){p = n;}

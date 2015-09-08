@@ -100,7 +100,7 @@ public class Szene{
 	public void renderObjekts(){
 		for(Objekt o : objekte){
 			if(o.isHidden()) continue;
-			o.render(x, batch);
+			o.render();
 		}
 	}
 	

@@ -33,8 +33,8 @@ public class Wait extends Objekt{
 		getBild().getSprite().setOrigin(size/2f, size/2f);
 	}
 
-	public void render(ShapeRenderer x, SpriteBatch batch){
+	public void render(){
 		getBild().getSprite().setRotation(r);
-		super.render(x, batch);
+		super.render();
 	}
 }

@@ -55,7 +55,7 @@ public class Overlays{
 		for(Overlay o : roverlays){
 			if(!o.isShown()) continue;
 			o.update();
-			o.render(Szene.x, Szene.batch);
+			o.render();
 		}
 	}
 	

@@ -26,7 +26,7 @@ public class Formular extends Grid{
 		super(2, 0.1F, 0.4F);
 	}
 	
-	public void addInput(String text, String label, boolean empty, boolean z){
+	public void addInput(String text, String label, boolean empty){
 		final Rectangle r1 = getRectangle();
 		Rectangle r2 = getRectangle();
 		Text t = new Text(label+""+(empty?" (Optional)":"")+":", r1.getX(), r1.getY(), r1.getWidth(), Color.WHITE, getFont()){
@@ -34,7 +34,7 @@ public class Formular extends Grid{
 				return r1.getHeight();
 			}
 		};
-		Input i = new Input(text, label, r2.getX(), r2.getY(), r2.getWidth(), r2.getHeight(), getFont(), empty, z);
+		Input i = new Input(text, label, r2.getX(), r2.getY(), r2.getWidth(), r2.getHeight(), getFont(), empty);
 		inputs.add(i);
 		getSzene().setObjekte(t, i);
 	}

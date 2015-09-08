@@ -15,6 +15,8 @@ import de.gogonania.bluetooth.util.Listener;
 import de.gogonania.bluetooth.util.Notification;
 import java.util.ArrayList;
 import de.gogonania.bluetooth.objekte.overlays.Overlays;
+import android.content.Intent;
+import android.net.Uri;
 
 public class Util implements ApplicationListener{
 	private static Szene szene;
@@ -33,7 +35,6 @@ public class Util implements ApplicationListener{
 	private static float lasty = -1;
 	
 	public void create(){
-		Szene.init();
 		cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cam.position.set(Gdx.graphics.getWidth()/2F, Gdx.graphics.getHeight()/2F, 0);
 	}
@@ -123,6 +124,7 @@ public class Util implements ApplicationListener{
     public void pause(){}
 	public void resume(){}
 	public void dispose(){}
+	public static void browse(String url){Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url)); MainActivity.getThis().startActivity(i);}
 	public static boolean isNumeric(String s){try{Integer.parseInt(s); return true;}catch(Exception e){return false;}}
 	public static Runnable getRunnable(final Szene s, final boolean v){return new Runnable(){public void run(){if(v){Util.vib();} else{} setSzene(s);}};}
 	public static void error(Exception e){notificationRed("Fehler! "+e.getClass().getSimpleName()+"\n"+e.getMessage()+""); e.printStackTrace();}

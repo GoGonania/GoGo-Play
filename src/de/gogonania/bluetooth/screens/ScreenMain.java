@@ -13,6 +13,7 @@ import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.Grid;
 import de.gogonania.bluetooth.util.Listener;
+import de.gogonania.bluetooth.spielio.save.Spielsaves;
 
 public class ScreenMain extends ScreenBase{
 	private Grid g = new Grid(1, 0.5F, 0.2F);
@@ -20,9 +21,10 @@ public class ScreenMain extends ScreenBase{
 	public String getTitle(){return "Startseite";}
 	
 	public void open(){
-		setAction("Spielstände verwalten", new ScreenSpielstände());
-		setAction("Entwickler-Bereich", new ScreenDebug());
+		if(Spielsaves.hatSpielstände()) setAction("Spielstände verwalten", new ScreenSpielstände());
 		setAction("Einstellungen", new ScreenEinstellungen());
+		setAction("Extras & Infos", new ScreenExtras());
+		
 		setActionButtonText("Menü");
 		
 		setObjekt(new Button("Name ändern", getBarHeight()*4.9F, 0, getBarHeight()*2.4F, getBarHeight()/1.5F, Bilder.cgreen, Color.BLACK, fontlittle){
@@ -41,7 +43,7 @@ public class ScreenMain extends ScreenBase{
 				});
 			}
 		});
-		TextObjekt name = new TextObjekt("Eingeloggt als "+Util.name, 0, 0, getBarHeight()*5, getBarHeight()/1.5F, Bilder.clgray, Color.BLACK, fontlittle);
+		TextObjekt name = new TextObjekt("Eingeloggt als "+Util.name, 0, 0, getBarHeight()*5, getBarHeight()/1.5F, Bilder.bar, Color.BLACK, fontlittle);
 		name.setActive(false);
 		name.setBorder(Color.BLACK);
 		setObjekt(name);

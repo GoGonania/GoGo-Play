@@ -47,6 +47,7 @@ public class MainActivity extends AndroidApplication{
 		GameUtil.notifyPause();
 		Gdx.app.postRunnable(new Runnable(){
 			public void run(){
+				Szene.init();
 				Bilder.init();
 			}
 		});

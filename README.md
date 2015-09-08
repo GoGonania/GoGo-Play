@@ -9,3 +9,9 @@ GoGo-Play ist eine kleine Spielesammlung für Android, bei der man alleine oder 
 <li>Passwortgeschütze Spiele</li>
 <li>Chat-System</li>
 </ul>
+
+## Benutze Bibliotheken
+<ul>
+<li>LibGDX</li>
+<li>Kryonet</li>
+</ul>

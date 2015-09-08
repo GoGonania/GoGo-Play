@@ -6,39 +6,30 @@ import de.gogonania.bluetooth.spielio.SpielInfo;
 import de.gogonania.bluetooth.spielio.Spielhalle;
 import de.gogonania.bluetooth.util.io.SaveItem;
 import de.gogonania.bluetooth.util.io.SaveObjekt;
+import de.gogonania.bluetooth.util.Zeit;
 
 public class Spielsave extends SaveObjekt{
-	private SpielInfo info;
-	
 	public Spielsave(SaveItem s) {
 		super(s);
 	}
 	
 	public void create(String spielname, String[] para, String data){
-		getSave().set("name", spielname);
+		getSave().set("n", spielname);
 		String aus = "";
 		for(String s : para){
-			aus += ":"+s+"";
+			aus += "-"+s+"";
 		}
 		aus = aus.substring(1);
-		getSave().set("paras", aus);
-		getSave().set("version", ""+Util.getAppVersionCode());
-		getSave().set("data", data);
-		getSave().set("time", System.currentTimeMillis()+"");
-		Spielsaves.saves.add(this);
+		getSave().set("p", aus);
+		getSave().set("d", data);
+		getSave().set("t", Zeit.tag()+" "+Zeit.zeit());
 	}
 	
-	public long getTime(){return (System.currentTimeMillis() - Long.parseLong(getSave().get("time")))/1000/60;}
-	public void register(){GameUtil.registerServer(getSave().get("paras").split(":"), Spielhalle.get(getSave().get("name")), this);}
-	public String getData(){return getSave().get("data");}
-	public boolean istKompatibel(){return Util.getAppVersionCode() == Integer.valueOf(getSave().get("version"));}
-	
-	public String getDetail(){
-		if(info == null){
-			info = Spielhalle.get(getSave().get("name")).getInfo();
-		}
-		return info.getName()+" (vor "+getTime()+" min)";
-	}
+	public void register(){GameUtil.registerServer(getSave().get("p").split("-"), Spielhalle.get(getSave().get("n")), this);}
+	public String getData(){return getSave().get("d");}
+	public String getTime(){return getSave().get("t");}
+	public String getName(){return Spielhalle.get(getSave().get("n")).getInfo().getName();}
+	public String getDetail(){return getName()+" ("+getTime()+")";}
 	
 	public void remove() {
 		super.remove();

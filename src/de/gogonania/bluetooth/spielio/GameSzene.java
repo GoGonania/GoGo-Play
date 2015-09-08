@@ -23,33 +23,35 @@ public class GameSzene <T> extends Szene{
 	}
 	
 	public void onBack(){
-		Fenster.select("Was willst du machen?", !GameUtil.isOwner() ?new String[]{"Spiel speichern", "Nachricht senden", "Ping testen", "Spiel verlassen"}: new String[]{"Spiel speichern", "Nachricht senden", "Spieler entfernen", "Spiel beenden"}, false, new SelectListener(){
+		Fenster.select("Was willst du machen?", !GameUtil.isOwner()?new String[]{"Nachricht senden", "Ping testen", "Spiel verlassen"}: new String[]{"Spiel speichern", "Nachricht senden", "Spieler entfernen", "Spiel beenden"}, false, new SelectListener(){
 				public void selected(int id){
-					switch(id){
-					    case 0:
-					    	if(GameUtil.isOwner()){
-					    		if(GameUtil.save()){
-					    		    Util.notificationGreen("Spiel wurde gespeichert");
-					    	    } else{
-					    		    Util.notificationRed("Dieses Spiel kann nicht gespeichert werden");
-					    	    }
-					    	} else{
-					    		Util.notificationRed("Nur der Spiel-Besitzer kann dies machen");
-					    	}
-					    break;
-						case 1:
-							Confirms.sendMessage();
-						break;
-						case 2:
-							if(GameUtil.isOwner()){
+					if(GameUtil.isOwner()){
+						switch(id){
+							case 0:
+								if(!GameUtil.save()) Util.notificationRed("Dieses Spiel kann nicht gespeichert werden");
+								break;
+							case 1:
+								Confirms.sendMessage();
+								break;
+							case 2:
 								Confirms.kickPlayer();
-							} else{
+								break;
+							case 3:
+								Confirms.closeGame();
+								break;
+						}
+					} else{
+						switch(id){
+							case 0:
+								Confirms.sendMessage();
+								break;
+							case 1:
 								GameUtil.game.testPing();
-							}
-						break;
-						case 3:
-							Confirms.closeGame();
-						break;
+								break;
+							case 2:
+								Confirms.closeGame();
+								break;
+						}
 					}
 				}
 			});

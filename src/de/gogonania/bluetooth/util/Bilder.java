@@ -5,6 +5,7 @@ public class Bilder{
 	public static Bild background;
 	public static Bild logo;
 	public static Bild himmel;
+	public static Bild bar;
 	
 	public static Bild normal;
 	public static Bild cred;
@@ -24,6 +25,7 @@ public class Bilder{
 		background = new Bild("background.jpg");
 		logo = new Bild("logo.png");
 		himmel = new Bild("himmel.jpg");
+		bar = new Bild("bar.jpg");
 		
 		normal = new Bild(Color.valueOf("3399ff"));
 		cred = new Bild(Color.valueOf("dd3333"));

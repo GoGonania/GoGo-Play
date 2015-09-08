@@ -25,19 +25,20 @@ public class TextObjekt extends Objekt{
 		this(text, x, y, width, height, n, textcolor, Szene.font);
 	}
 
-	public void render(ShapeRenderer x, SpriteBatch batch){
-		super.render(x, batch);
-		renderText(batch, text);
+	public void render(){
+		super.render();
+		renderText(text);
 	}
 	
-	public void renderText(SpriteBatch batch, String text){
-		batch.begin();
+	public void renderText(String text){
+		Szene.batch.begin();
 		color.a = getAlpha();
 		glyph.setText(font, text, color, getWidth(), a, true);
-	    font.draw(batch, glyph, getX(), getY() + getHeight()/2 + glyph.height/2);
-		batch.end();
+	    font.draw(Szene.batch, glyph, getX(), getY() + getHeight()/2 + glyph.height/2);
+		Szene.batch.end();
 	}
 
+	public Color getTextColor(){return color;}
 	public void setTextColor(Color c){color = c;}
 	public void setBitmapFont(BitmapFont f){font = f;}
 	public String getText(){return text;}

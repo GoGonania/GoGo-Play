@@ -43,12 +43,7 @@ public class Spielstand{
 		saveSpiele = new SaveManager("1");
 		
 		for(SaveItem s: saveSpiele.list()){
-			Spielsave ss = new Spielsave(s);
-			if(ss.istKompatibel()){
-				Spielsaves.saves.add(new Spielsave(s));
-			} else{
-				ss.remove();
-			}
+			Spielsaves.saves.add(new Spielsave(s));
 		}
 	}
 }

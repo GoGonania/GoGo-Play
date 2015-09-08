@@ -19,16 +19,8 @@ public class ScreenKick extends Szene{
 	}
 	
 	public void open(){
-		setBigButton("Zurück zur Startseite", Util.getRunnable(new ScreenMain(), true));
+		setBigButton("ZurÃ¼ck zur Startseite", Util.getRunnable(new ScreenMain(), true));
 		setObjekt(new Text(text, 0, Gdx.graphics.getHeight()*0.7F, Gdx.graphics.getWidth(), Color.WHITE, fontbig));
-	}
-
-	public Anim getOpenAnimation(){
-		return null;
-	}
-	
-	public Anim getCloseAnimation(){
-		return null;
 	}
 	
 	public static void show(String grund){
@@ -36,6 +28,6 @@ public class ScreenKick extends Szene{
 		text = "Du wurdest von '"+GameUtil.game.getName()+"' ausgeschlossen!\n\nGrund:\n"+grund;
 		Wifi.close();
 		Util.vibBig();
-		Util.setSzene(k);
+		Util.setSzene(k, null);
 	}
 }
