@@ -15,12 +15,14 @@ import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketCookieClick;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketUpgrade;
 import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Grid;
+import de.gogonania.bluetooth.objekte.Progress;
 
 public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker>{
 	private Image cookie;
 	private Text geld;
 	private Text info;
 	private Button upgrade;
+	private Progress p;
 	private ArrayList<Group> groups = new ArrayList<Group>();
 	
 	public SzeneGoGoKlicker(){
@@ -49,7 +51,9 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker>{
 			}
 		};
 		
-		setObjekte(cookie, geld, info, upgrade);
+		p = new Progress(cookiesize/10F, Gdx.graphics.getHeight()-cookiesize/6F, cookiesize, cookiesize/8F, Bilder.bar, Bilder.cyellow, Color.WHITE, font);
+		
+		setObjekte(cookie, geld, info, upgrade, p);
 		
 		Grid g = new Grid(4, 0.15F, 0.2F){
 			public float getHeightMargin(){
@@ -66,8 +70,11 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker>{
 	
 	public void update(){
 		if(!GameUtil.hatSpiel()) return;
+		p.setHide(getClient().a.gold);
+		cookie.setBackground(getClient().a.gold?Bilder.cookiegold:Bilder.cookie);
+		p.setProgress(getClient().a.progress);
 		geld.setText(Util.makeNiceGeld(getClient().geld));
-		info.setText("Pro Klick: "+Util.makeNiceGeld(getClient().a.perclick)+"\nPro Sekunde: "+Util.makeNiceGeld(getClient().a.getPlus())+"");
+		info.setText("Pro Klick: "+Util.makeNiceGeld(getClient().a.getPerClick())+""+(getClient().a.gold?" (x2)":"")+"\nPro Sekunde: "+Util.makeNiceGeld(getClient().a.getPlus())+"");
 		upgrade.setText("Upgraden ("+Util.makeNiceGeld(getClient().a.getUpgradePreis())+")");
 		upgrade.setBackground(getClient().geld >= getClient().a.getUpgradePreis()?Bilder.cyellow:Bilder.clgray);
 		for(Group g : groups){

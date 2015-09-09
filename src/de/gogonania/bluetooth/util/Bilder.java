@@ -20,6 +20,7 @@ public class Bilder{
 	public static Bild blockstein;
 	
 	public static Bild cookie;
+	public static Bild cookiegold;
 	
 	public static void init(){
 		background = new Bild("background.jpg");
@@ -40,6 +41,7 @@ public class Bilder{
 		blockstein = block("stein");
 		
 		cookie = new Bild("cookie.png");
+		cookiegold = new Bild("cookie_gold.png");
 	}
 	
 	private static Bild block(String name){

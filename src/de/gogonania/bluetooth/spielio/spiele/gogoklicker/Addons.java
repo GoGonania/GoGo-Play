@@ -4,6 +4,8 @@ import java.util.ArrayList;
 public class Addons{
 	public ArrayList<Addon> addons = new ArrayList<Addon>();
 	public long perclick = 1;
+	public boolean gold;
+	public float progress;
 	
 	public Addons(){
 		add("Toilette", 100, 1);
@@ -11,6 +13,7 @@ public class Addons{
 		add("Bratwurststand", 3000, 10);
 		add("Eiscafe", 20000, 60);
 		add("Fast-Food Laden", 160000, 360);
+		add("Burger-Kette", 1000000, 2000);
 	}
 	
 	private void add(String name, long preis, long plus){
@@ -51,5 +54,9 @@ public class Addons{
 			p *= 2;
 		}
 		return p;
+	}
+	
+	public long getPerClick(){
+		return perclick * (gold?2:1);
 	}
 }

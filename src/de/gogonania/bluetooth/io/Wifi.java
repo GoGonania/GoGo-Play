@@ -1,9 +1,6 @@
 package de.gogonania.bluetooth.io;
 
-import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import de.gogonania.bluetooth.packete.*;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
@@ -12,30 +9,18 @@ import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
-
 import de.gogonania.bluetooth.Util;
-import de.gogonania.bluetooth.packete.PacketBereit;
-import de.gogonania.bluetooth.packete.PacketChanged;
-import de.gogonania.bluetooth.packete.PacketData;
-import de.gogonania.bluetooth.packete.PacketJoin;
-import de.gogonania.bluetooth.packete.PacketJoined;
-import de.gogonania.bluetooth.packete.PacketKick;
-import de.gogonania.bluetooth.packete.PacketMessage;
-import de.gogonania.bluetooth.packete.PacketPause;
-import de.gogonania.bluetooth.packete.PacketPing;
-import de.gogonania.bluetooth.packete.PacketPlayerList;
-import de.gogonania.bluetooth.packete.PacketRequestData;
-import de.gogonania.bluetooth.packete.PacketRequestInfo;
-import de.gogonania.bluetooth.packete.PacketScreen;
-import de.gogonania.bluetooth.packete.PacketServerInfo;
 import de.gogonania.bluetooth.screens.ScreenKick;
 import de.gogonania.bluetooth.spielio.spiele.gogocraft.packete.PacketBlock;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketAddon;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketCookieClick;
-import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketGeldUpdate;
+import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketGold;
+import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketUpdate;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketUpgrade;
-import de.gogonania.bluetooth.spielio.spiele.test.PacketClick;
-import de.gogonania.bluetooth.spielio.spiele.test.PacketClicked;
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Wifi {
 	public static ArrayList<Game> games = new ArrayList<Game>();
@@ -125,6 +110,7 @@ public class Wifi {
 		k.register(String[].class);
 		k.register(Boolean.class);
 		k.register(Long.class);
+		k.register(Float.class);
 		k.register(PacketJoin.class);
 		k.register(PacketJoined.class);
 		k.register(PacketKick.class);
@@ -140,14 +126,12 @@ public class Wifi {
 		k.register(PacketRequestData.class);
 		k.register(PacketData.class);
 		
-		k.register(PacketClick.class);
-		k.register(PacketClicked.class);
-		
 		k.register(PacketBlock.class);
 		
 		k.register(PacketCookieClick.class);
-		k.register(PacketGeldUpdate.class);
+		k.register(PacketUpdate.class);
 		k.register(PacketAddon.class);
 		k.register(PacketUpgrade.class);
+		k.register(PacketGold.class);
 	}
 }

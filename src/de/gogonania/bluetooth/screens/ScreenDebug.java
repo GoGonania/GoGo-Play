@@ -51,6 +51,6 @@ public class ScreenDebug extends ScreenAktionenBase{
 	}
 	
 	public void update(){
-		debug.setText("FPS: "+Gdx.graphics.getFramesPerSecond()+"\nSpeicher: "+Util.makeNiceZahl(Gdx.app.getJavaHeap()/1000)+" von "+Util.makeNiceZahl(Gdx.app.getNativeHeap()/1000)+"");
+		debug.setText("FPS: "+Gdx.graphics.getFramesPerSecond()+"\nSpeicher: "+Util.makeNiceZahl(Gdx.app.getJavaHeap()/1000)+" - "+Util.makeNiceZahl(Gdx.app.getNativeHeap()/1000)+"");
 	}
 }
