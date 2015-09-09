@@ -1,4 +1,4 @@
-# GoGo-Play
+# GoGo-Play <a href="bin/GoGoGame.apk">Download</a>
 GoGo-Play ist eine kleine Spielesammlung für Android, bei der man alleine oder mit anderen Spielern von mir erstellte Spiele spielen kann.
 
 ## Funktionen
