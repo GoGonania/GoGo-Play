@@ -1,14 +1,12 @@
 package de.gogonania.bluetooth.util.io;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.InputStream;
 
 import de.gogonania.bluetooth.MainActivity;
 import de.gogonania.bluetooth.Util;
-import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 public class GoGoFile extends File{
 	public GoGoFile(String path){

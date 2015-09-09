@@ -1,13 +1,10 @@
 package de.gogonania.bluetooth.objekte;
-import com.badlogic.gdx.utils.Align;
-
-import de.gogonania.bluetooth.util.Bild;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
+
 import de.gogonania.bluetooth.Szene;
+import de.gogonania.bluetooth.util.Bild;
 
 public class Progress extends TextObjekt{
 	private Bild pb;

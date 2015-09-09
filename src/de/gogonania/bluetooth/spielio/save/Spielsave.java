@@ -1,12 +1,10 @@
 package de.gogonania.bluetooth.spielio.save;
 
-import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.io.GameUtil;
-import de.gogonania.bluetooth.spielio.SpielInfo;
 import de.gogonania.bluetooth.spielio.Spielhalle;
+import de.gogonania.bluetooth.util.Zeit;
 import de.gogonania.bluetooth.util.io.SaveItem;
 import de.gogonania.bluetooth.util.io.SaveObjekt;
-import de.gogonania.bluetooth.util.Zeit;
 
 public class Spielsave extends SaveObjekt{
 	public Spielsave(SaveItem s) {

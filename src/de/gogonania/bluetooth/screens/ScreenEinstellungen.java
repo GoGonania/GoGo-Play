@@ -1,19 +1,15 @@
 package de.gogonania.bluetooth.screens;
 
-import java.io.File;
-import android.content.Intent;
-import android.net.Uri;
 import de.gogonania.bluetooth.Anim;
-import de.gogonania.bluetooth.MainActivity;
 import de.gogonania.bluetooth.Registry;
 import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.sparts.ScreenAktionenBase;
+import de.gogonania.bluetooth.spielio.save.Spielsaves;
 import de.gogonania.bluetooth.util.Bilder;
+import de.gogonania.bluetooth.util.Confirms;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.SliderListener;
-import de.gogonania.bluetooth.util.Confirms;
-import de.gogonania.bluetooth.spielio.save.Spielsaves;
 
 public class ScreenEinstellungen extends ScreenAktionenBase{
     public Szene getPreSzene(){

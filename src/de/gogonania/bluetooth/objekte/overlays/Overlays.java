@@ -1,12 +1,12 @@
 package de.gogonania.bluetooth.objekte.overlays;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import com.badlogic.gdx.Gdx;
 
 import de.gogonania.bluetooth.Spielstand;
-import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.util.io.SaveItem;
-import java.util.Collections;
 
 public class Overlays{
 	private static ArrayList<Overlay> overlays = new ArrayList<Overlay>();

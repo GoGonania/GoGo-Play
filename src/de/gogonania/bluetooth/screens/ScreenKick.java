@@ -3,7 +3,6 @@ package de.gogonania.bluetooth.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
-import de.gogonania.bluetooth.Anim;
 import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.io.GameUtil;

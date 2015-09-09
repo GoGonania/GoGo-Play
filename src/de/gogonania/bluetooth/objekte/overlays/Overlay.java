@@ -1,14 +1,11 @@
 package de.gogonania.bluetooth.objekte.overlays;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.util.Bild;
 import de.gogonania.bluetooth.util.io.SaveItem;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.Gdx;
 
 public abstract class Overlay extends Button implements Comparable<Overlay>{
 	public abstract void update();

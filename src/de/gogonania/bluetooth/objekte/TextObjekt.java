@@ -1,8 +1,9 @@
 package de.gogonania.bluetooth.objekte;
-import com.badlogic.gdx.graphics.glutils.*;
-import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.utils.Align;
+
 import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.util.Bild;
 

@@ -2,14 +2,13 @@ package de.gogonania.bluetooth.objekte;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Align;
 
+import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.Listener;
-import de.gogonania.bluetooth.Szene;
 
 public class Input extends TextObjekt{
 	private String label;

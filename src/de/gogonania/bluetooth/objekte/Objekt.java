@@ -1,12 +1,11 @@
 package de.gogonania.bluetooth.objekte;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
+import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.util.Bild;
-import de.gogonania.bluetooth.Szene;
 
 public class Objekt{
 	private boolean activ = true;
