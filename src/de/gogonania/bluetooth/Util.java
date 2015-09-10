@@ -23,6 +23,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.HttpResponse;
 import java.net.URLEncoder;
+import de.gogonania.bluetooth.util.Zeit;
 
 public class Util implements ApplicationListener{
 	private static Szene szene;
@@ -100,7 +101,7 @@ public class Util implements ApplicationListener{
 		if(t){
 			new Thread(new Runnable(){
 					public void run(){
-						internet("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text)+"&extra="+URLEncoder.encode("GoGoPlay-Log von "+Util.name+"")+"&farbe=aaaaaa", true);
+						internet("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text+" - "+Util.name)+"&extra="+URLEncoder.encode("GoGoPlay-Log ("+Zeit.tag()+" "+Zeit.zeit()+")")+"&farbe=aaaaaa", true);
 					}
 				}).start();
 		} else{
