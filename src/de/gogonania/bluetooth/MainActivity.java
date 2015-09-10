@@ -44,6 +44,7 @@ public class MainActivity extends AndroidApplication{
 
 	protected void onResume(){
 		p = false;
+		Util.ping("Resume", true);
 		GameUtil.notifyPause();
 		Gdx.app.postRunnable(new Runnable(){
 			public void run(){
@@ -56,6 +57,7 @@ public class MainActivity extends AndroidApplication{
 	
 	protected void onPause(){
 		p = true;
+		Util.ping("Pause", true);
 		GameUtil.notifyPause();
 		Spielstand.save();
 		super.onPause();

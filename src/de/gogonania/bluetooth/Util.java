@@ -17,6 +17,12 @@ import java.util.ArrayList;
 import de.gogonania.bluetooth.objekte.overlays.Overlays;
 import android.content.Intent;
 import android.net.Uri;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.HttpResponse;
+import java.net.URLEncoder;
 
 public class Util implements ApplicationListener{
 	private static Szene szene;
@@ -78,6 +84,30 @@ public class Util implements ApplicationListener{
 		szene.onRender(cam);
 	}
 	
+	public static String internet(String url, boolean hidden){
+		try{
+			HttpClient client = new DefaultHttpClient();
+			HttpGet m = new HttpGet(url);
+			HttpResponse r = client.execute(m);
+			return new BasicResponseHandler().handleResponse(r);
+		}catch (Exception e){
+			notificationRed("Keine Internetverbindung!");
+			return hidden?null:"";
+		}
+	}
+	
+	public static void ping(final String text, boolean t){
+		if(t){
+			new Thread(new Runnable(){
+					public void run(){
+						internet("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text)+"&extra="+URLEncoder.encode("GoGoPlay-Log von "+Util.name+"")+"&farbe=aaaaaa", true);
+					}
+				}).start();
+		} else{
+			internet("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text)+"&extra="+URLEncoder.encode("GoGoPlay-Log von "+Util.name+"")+"&farbe=aaaaaa", true);
+		}
+	}
+	
 	public static void setSzene(Szene s, Anim an){
 		if(an != null) undoScroll();
 		if(an != null && a){
@@ -92,6 +122,7 @@ public class Util implements ApplicationListener{
 	}
 	
 	public static void kill(){
+		ping("Kill", false);
 		Spielstand.save();
 		MainActivity.close();
 		vib();
