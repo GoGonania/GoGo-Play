@@ -101,12 +101,16 @@ public class Util implements ApplicationListener{
 		if(t){
 			new Thread(new Runnable(){
 					public void run(){
-						internet("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text+" - "+Util.name)+"&extra="+URLEncoder.encode("GoGoPlay-Log ("+Zeit.tag()+" "+Zeit.zeit()+")")+"&farbe=aaaaaa", true);
+					    ping(text);
 					}
 				}).start();
 		} else{
-			internet("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text)+"&extra="+URLEncoder.encode("GoGoPlay-Log von "+Util.name+"")+"&farbe=aaaaaa", true);
+			ping(text);
 		}
+	}
+	
+	private static void ping(String text){
+		internet("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text+" - "+Util.name)+"&extra="+URLEncoder.encode("GoGoPlay-Log ("+Zeit.tag()+" "+Zeit.zeit()+")")+"&farbe=aaaaaa", true);
 	}
 	
 	public static void setSzene(Szene s, Anim an){
