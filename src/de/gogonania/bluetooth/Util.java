@@ -17,11 +17,9 @@ import java.util.ArrayList;
 import de.gogonania.bluetooth.objekte.overlays.Overlays;
 import android.content.Intent;
 import android.net.Uri;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.HttpResponse;
+
+import java.io.InputStream;
+import java.net.URL;
 import java.net.URLEncoder;
 import de.gogonania.bluetooth.util.Zeit;
 
@@ -87,10 +85,11 @@ public class Util implements ApplicationListener{
 	
 	public static String internet(String url, boolean hidden){
 		try{
-			HttpClient client = new DefaultHttpClient();
-			HttpGet m = new HttpGet(url);
-			HttpResponse r = client.execute(m);
-			return new BasicResponseHandler().handleResponse(r);
+			InputStream in = new URL(url).openStream();
+			int b = 0;
+			String s = "";
+			while((b = in.read()) != -1){s += (char) b;}
+			return s;
 		}catch (Exception e){
 			notificationRed("Keine Internetverbindung!");
 			return hidden?null:"";
