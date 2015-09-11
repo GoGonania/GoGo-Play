@@ -16,15 +16,20 @@ public class ReactionGameColor extends ReactionGame{
 	private int inaline;
 	
 	public void open(){
-		Grid g = new Grid(inaline, 0F, 1F);
+		float height = (Gdx.graphics.getHeight()-SzeneReaction.barheight)/inaline;
+		float width = Gdx.graphics.getWidth()/inaline;
 		
-		for(final boolean b : ops){
-			Rectangle r = g.getRectangle();
-			Util.getSzene().setObjekt(new Button("", r.getX(), r.getY()-SzeneReaction.barheight, r.getWidth(), (Gdx.graphics.getHeight()-SzeneReaction.barheight)/inaline, b?Bilder.cred:Bilder.clgray, Color.BLACK, Szene.fontbig){
-				public void click(){
-					if(result(b)) Util.vib();
-				}
-			});
+		int id = 0;
+		for(int l = 0; l < inaline; l++){
+			for(int i = 0; i < inaline; i++){
+				final boolean b = ops[id];
+				Util.getSzene().setObjekt(new Button("", i*width, l*height, width, height, b?Bilder.cred:Bilder.clgray, Color.BLACK, Szene.fontbig){
+						public void click(){
+							if(result(b)) Util.vib();
+						}
+					});
+				id++;
+			}
 		}
 	}
 
