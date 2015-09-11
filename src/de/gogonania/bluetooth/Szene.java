@@ -67,6 +67,8 @@ public class Szene{
 		batch.setProjectionMatrix(cam.combined);
 		Vector3 v = cam.unproject(new Vector3(0, Gdx.graphics.getHeight(), 0));
 		
+		if(isClosed()) onOpen();
+		
 		if(background.hatColor()){
 			x.begin(ShapeRenderer.ShapeType.Filled);
 			x.setColor(background.getColor());
@@ -78,6 +80,8 @@ public class Szene{
 			background.getSprite().draw(batch);
 			batch.end();
 		}
+		
+		if(isClosed()) onOpen();
 		
 		renderObjekts();
 		render();

@@ -40,17 +40,21 @@ public class GameServer {
 				final String name = ((PacketJoin) o).name;
 				IPerson pp = getPerson(name);
 				if(spiel.getInfo().darfVerbinden()){
-					if(pp == null){
-						if(!hatPasswort() || passwort.equals(((PacketJoin) o).passwort)){
-							Person np = new Person(c);
-							np.setName(name);
-							c.setName(name);
-							add(np);
+					if(!gs.isInGame() || GameUtil.game.getSpiel().getInfo().erlaubtNachjoiner()){
+						if(pp == null){
+							if(!hatPasswort() || passwort.equals(((PacketJoin) o).passwort)){
+								Person np = new Person(c);
+								np.setName(name);
+								c.setName(name);
+								add(np);
+							} else{
+								w.send(PacketKick.create("Falsches Passwort"), c);
+							}
 						} else{
-							w.send(PacketKick.create("Falsches Passwort"), c);
+							w.send(PacketKick.create("Dieser Name ist bereits im Spiel"), c);
 						}
 					} else{
-						w.send(PacketKick.create("Dieser Name ist bereits im Spiel"), c);
+						w.send(PacketKick.create("Das Spiel wurde bereits gestartet"), c);
 					}
 				} else{
 					w.send(PacketKick.create("Das Spiel ist bereits voll"), c);
@@ -109,6 +113,7 @@ public class GameServer {
 		info.onPacket(pp.player);
 		sendAll(pp);
 		sendMessage(p.getName()+" hat das Spiel verlassen", "r");
+		if(!shutdown && !GameUtil.game.getSpiel().getInfo().darfSpielStarten()) close("Die Mindestanzahl an Spielern wurde nicht eingehalten");
 	}
 	
 	public void add(IPerson p){
@@ -177,9 +182,10 @@ public class GameServer {
 	}
 	
 	public void sendAll(Object o){
-		for(IPerson p : personen){
-			w.send(o, p);
+		for(int i = 1; i < personen.size(); i++){
+			w.send(o, personen.get(i));
 		}
+		w.send(o, personen.get(0));
 	}
 	
 	public void save(Spielsave s){
@@ -206,9 +212,9 @@ public class GameServer {
 			});
 	}
 	
-	public void close(){
+	public void close(String grund){
 		shutdown = true;
-		sendAll(PacketKick.create("Spiel wurde vom Besitzer beendet"));
+		sendAll(PacketKick.create(grund));
 		new Thread(new Runnable(){
 			public void run() {
 				while(w.isWorking()){Util.sleep(10);}

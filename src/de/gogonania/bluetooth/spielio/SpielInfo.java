@@ -5,13 +5,14 @@ public abstract class SpielInfo{
 	public abstract String getName();
 	public int getMinPlayer(){return 1;}
 	public int getMaxPlayer(){return -1;}
+	public boolean erlaubtNachjoiner(){return true;}
 	
 	public boolean darfSpielStarten(){
 		return GameUtil.game.server.personen.size() >= getMinPlayer();
 	}
 	
 	public boolean darfVerbinden(){
-		return getMaxPlayer() == -1 || GameUtil.game.server.personen.size() + 1 <= getMaxPlayer();
+		return getMaxPlayer() == -1 || GameUtil.game.server.personen.size() < getMaxPlayer();
 	}
 	
 	public String getPlayerText(){

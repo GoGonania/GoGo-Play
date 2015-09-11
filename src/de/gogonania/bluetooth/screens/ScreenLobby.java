@@ -11,6 +11,7 @@ import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.objekte.Text;
 import de.gogonania.bluetooth.sparts.ScreenBase;
 import de.gogonania.bluetooth.util.Confirms;
+import de.gogonania.bluetooth.util.Bilder;
 
 public class ScreenLobby extends ScreenBase{
 	private Text t;
@@ -54,6 +55,7 @@ public class ScreenLobby extends ScreenBase{
 		
 		start = setBigButton("Spiel starten", new Runnable(){
 			public void run(){
+				if(!GameUtil.game.getSpiel().getInfo().darfSpielStarten()) return;
 				Util.vib();
 				GameUtil.game.server.startGame();
 			}
@@ -66,7 +68,18 @@ public class ScreenLobby extends ScreenBase{
 	
 	public void update(){
 		if(!GameUtil.hatSpiel()) return;
-		start.setHide(!GameUtil.isOwner()?true:!GameUtil.game.getSpiel().getInfo().darfSpielStarten());
+		start.setHide(!GameUtil.isOwner());
+		if(!start.isHidden()){
+			boolean d = GameUtil.game.getSpiel().getInfo().darfSpielStarten();
+			if(d){
+				start.setText("Spiel starten");
+				start.setBackground(Bilder.cgreen);
+			} else{
+				int diff = GameUtil.game.getSpiel().getInfo().getMinPlayer() - GameUtil.game.server.personen.size();
+				start.setText("Es "+(diff == 1?"wird noch ein":"werden noch "+diff+"")+" Spieler benötigt");
+				start.setBackground(Bilder.clgray);
+			}
+		}
 		String aus = "";
 		for(PlayerInfo p : GameUtil.game.getInfo().getInfos()){
 			aus += "\n"+p.getName()+""+(p.isPaused()?" (Pausiert)":"")+"";

@@ -6,6 +6,7 @@ import de.gogonania.bluetooth.objekte.overlays.Overlays;
 import de.gogonania.bluetooth.screens.ScreenMain;
 import de.gogonania.bluetooth.sparts.SzeneLoading;
 import de.gogonania.bluetooth.spielio.Spielhalle;
+import de.gogonania.bluetooth.spielio.spiele.reaction.ReactionGames;
 
 public class SzeneStartup extends SzeneLoading {
 	private Thread thread;
@@ -15,6 +16,7 @@ public class SzeneStartup extends SzeneLoading {
 		Spielstand.load();
 		Overlays.init();
 		Spielhalle.init();
+		ReactionGames.init();
 	}
 	
 	public void update(){

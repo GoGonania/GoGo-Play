@@ -31,7 +31,7 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker>{
 	
 	public void open(){
 		final float cookiesize = Gdx.graphics.getWidth()/4F;
-		cookie = new Image(cookiesize/10F, Gdx.graphics.getHeight()-cookiesize-cookiesize/10F, cookiesize, cookiesize, Bilder.cookie){
+		cookie = new Image(cookiesize/10F, Gdx.graphics.getHeight()-cookiesize-cookiesize/8F, cookiesize, cookiesize, Bilder.cookie){
 			public void click(){
 				Util.vib();
 				getClient().send(new PacketCookieClick());
@@ -70,9 +70,12 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker>{
 	
 	public void update(){
 		if(!GameUtil.hatSpiel()) return;
-		p.setHide(getClient().a.gold);
+		p.setHide(getClient().a.gold || getClient().a.progress == 0);
 		cookie.setBackground(getClient().a.gold?Bilder.cookiegold:Bilder.cookie);
 		p.setProgress(getClient().a.progress);
+		Color c = getClient().a.gold?Bilder.cyellow.getColor():Color.WHITE;
+		geld.setTextColor(c);
+		info.setTextColor(c);
 		geld.setText(Util.makeNiceGeld(getClient().geld));
 		info.setText("Pro Klick: "+Util.makeNiceGeld(getClient().a.getPerClick())+""+(getClient().a.gold?" (x2)":"")+"\nPro Sekunde: "+Util.makeNiceGeld(getClient().a.getPlus())+"");
 		upgrade.setText("Upgraden ("+Util.makeNiceGeld(getClient().a.getUpgradePreis())+")");

@@ -25,7 +25,7 @@ public class Confirms{
 	public static void closeGameServer(){
 		c("das", "Spiel beenden", new Runnable(){
 			public void run(){
-				GameUtil.game.server.close();
+				GameUtil.game.server.close("Spiel wurde vom Besitzer beendet");
 			}
 		});
 	}

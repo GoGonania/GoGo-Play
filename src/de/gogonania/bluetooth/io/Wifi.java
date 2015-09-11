@@ -21,6 +21,9 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import de.gogonania.bluetooth.spielio.spiele.reaction.PacketReactionStart;
+import de.gogonania.bluetooth.spielio.spiele.reaction.PacketReactionRight;
+import de.gogonania.bluetooth.spielio.spiele.reaction.PacketReactionEnd;
 
 public class Wifi {
 	public static ArrayList<Game> games = new ArrayList<Game>();
@@ -107,10 +110,12 @@ public class Wifi {
 		Kryo k = e.getKryo();
 		
 		k.register(String.class);
-		k.register(String[].class);
 		k.register(Boolean.class);
 		k.register(Long.class);
 		k.register(Float.class);
+		k.register(int[].class);
+		k.register(boolean[].class);
+		k.register(String[].class);
 		k.register(PacketJoin.class);
 		k.register(PacketJoined.class);
 		k.register(PacketKick.class);
@@ -133,5 +138,11 @@ public class Wifi {
 		k.register(PacketAddon.class);
 		k.register(PacketUpgrade.class);
 		k.register(PacketGold.class);
+		
+		k.register(PacketReactionStart.class);
+		k.register(PacketReactionRight.class);
+		k.register(PacketReactionEnd.class);
+		
+		k.register(Object[].class);
 	}
 }
