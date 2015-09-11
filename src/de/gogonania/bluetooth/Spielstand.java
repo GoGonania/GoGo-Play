@@ -46,6 +46,6 @@ public class Spielstand{
 			Spielsaves.saves.add(new Spielsave(s));
 		}
 		
-		Util.ping("App wurde gestartet!", true);
+		Util.ping("Start", true);
 	}
 }

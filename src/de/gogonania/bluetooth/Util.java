@@ -97,6 +97,7 @@ public class Util implements ApplicationListener{
 	}
 	
 	public static void ping(final String text, boolean t){
+		if(Util.name == null) return;
 		if(t){
 			new Thread(new Runnable(){
 					public void run(){

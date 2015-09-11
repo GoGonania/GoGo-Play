@@ -13,11 +13,16 @@ import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.spielio.spiele.reaction.ReactionGame;
 import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Grid;
+import java.util.Collections;
 
 public class ReactionGameNames extends ReactionGame{
 	
 	public void open(){
-		ArrayList<PlayerInfo> namen = GameUtil.game.getInfo().getInfos();
+		ArrayList<String> namen = new ArrayList<String>();
+		for(PlayerInfo p : GameUtil.game.getInfo().getInfos()){
+			namen.add(p.getName());
+		}
+		Collections.shuffle(namen);
 		
 		Grid g = new Grid(namen.size(), 0.1F, 0.4F){
 			public float getHeightMargin(){
@@ -28,8 +33,7 @@ public class ReactionGameNames extends ReactionGame{
 			}
 		};
 		
-		for(PlayerInfo p : namen){
-			final String n = p.getName();
+		for(final String n: namen){
 			Rectangle r = g.getRectangle();
 			Util.getSzene().setObjekt(new Button(n, r.getX(), r.getY(), r.getWidth(), r.getHeight(), Bilder.normal, Color.BLACK, Szene.fontbig){
 				public void click(){

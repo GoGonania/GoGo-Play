@@ -45,13 +45,12 @@ public class ReactionGameMath extends ReactionGame{
 		zahl1 = Util.random(20, 100);
 		zahl2 = Util.random(20, 100);
 		
-		int options = Util.random(4, 6);
+		int options = Util.random(4, 8);
 		ops = new int[options];
 		int r = Util.random((options*-1)+1, 0);
-		int s = Util.random(1, 3);
 
 		for(int i = 0; i < options; i++){
-			ops[i] = zahl1 + zahl2 +((r+i)*s);
+			ops[i] = zahl1 + zahl2 +((r+i)*2);
 		}
 	}
 

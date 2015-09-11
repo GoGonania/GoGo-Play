@@ -5,8 +5,8 @@ import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.util.Bilder;
 
 public class OverlayNotification extends Overlay{
-	private static final long shown = 3000;
-	private static final long timeout = 1500;
+	private static final long shown = 2500;
+	private static final long timeout = 1000;
 	
 	public void update(){
 		setText(" "+Util.n.text+" ");
