@@ -16,18 +16,11 @@ public class ReactionGameColor extends ReactionGame{
 	private int inaline;
 	
 	public void open(){
-		Grid g = new Grid(inaline, 0F, 0F){
-			public float getHeightMargin(){
-				return SzeneReaction.barheight;
-			}
-			public float getHeight(){
-				return (Gdx.graphics.getHeight()-getHeightMargin())/inaline;
-			}
-		};
+		Grid g = new Grid(inaline, 0F, 1F);
 		
 		for(final boolean b : ops){
 			Rectangle r = g.getRectangle();
-			Util.getSzene().setObjekt(new Button("", r.getX(), r.getY(), r.getWidth(), r.getHeight(), b?Bilder.cred:Bilder.clgray, Color.BLACK, Szene.fontbig){
+			Util.getSzene().setObjekt(new Button("", r.getX(), r.getY()-SzeneReaction.barheight, r.getWidth(), (Gdx.graphics.getHeight()-SzeneReaction.barheight)/inaline, b?Bilder.cred:Bilder.clgray, Color.BLACK, Szene.fontbig){
 				public void click(){
 					if(result(b)) Util.vib();
 				}

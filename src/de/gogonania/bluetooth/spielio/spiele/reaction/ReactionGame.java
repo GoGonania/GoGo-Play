@@ -31,7 +31,7 @@ public abstract class ReactionGame{
 	}
 	
 	public void onOpen(){open = true; open();}
-	public boolean result(boolean right){if(right && !wrong){richtig(); return true;} else{falsch(); return false;}}
+	public boolean result(boolean right){if(wrong){return false;} else{if(right){richtig(); return true;} else{falsch(); return false;}}}
 	public float getProgress(){return ((float)(System.currentTimeMillis()-starttime)) / ((float)getTime());}
 	public boolean isTimeout(){return System.currentTimeMillis() >= starttime+getTime();}
 	public boolean isOpened(){return open;}

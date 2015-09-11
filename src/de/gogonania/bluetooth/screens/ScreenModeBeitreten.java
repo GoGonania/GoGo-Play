@@ -58,7 +58,7 @@ public class ScreenModeBeitreten extends ScreenBase{
 		setActionHide(Wifi.isDiscovering());
 		weiter.setHide(s == 0 || Wifi.isDiscovering());
 		if(!Wifi.isDiscovering() && s == 0){
-			info.setText("Leider keine Spiele gefunden! Einfach nochmal suchen...");
+			info.setText("Leider keine Spiele gefunden!\nEinfach nochmal suchen...");
 		} else{
 			info.setText(""+(Wifi.isDiscovering()?"Suche lokale Spiele...\n\nGefundene Geräte: "+Wifi.getFoundDevices()+"\n":"")+"Gefundene Spiele: "+s+"");
 		}

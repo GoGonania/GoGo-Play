@@ -5,12 +5,4 @@ public class InfoReaction extends SpielInfo{
 	public String getName(){
 		return "Reaktions-Kampf";
 	}
-
-	public int getMinPlayer(){
-		return 2;
-	}
-
-	public boolean erlaubtNachjoiner(){
-		return false;
-	}
 }
