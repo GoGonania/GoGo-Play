@@ -12,7 +12,7 @@ import de.gogonania.bluetooth.io.GameUtil;
 
 public class ServerReaction extends SpielServer{
 	private ReactionGame g;
-	public static final int timeout = 3500;
+	public static final int timeout = 3000;
 	
 	public void onPacket(IPerson p, Object o){
 		if(o instanceof PacketReactionRight){
