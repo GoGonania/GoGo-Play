@@ -32,6 +32,7 @@ public class Game implements Comparable{
 	public GameServer server;
 	private SpielClient client;
 	private GameInfo info = new GameInfo();
+	private long ping;
 	
 	public void onPacket(Object o){
 		if(o instanceof PacketServerInfo){
@@ -55,7 +56,7 @@ public class Game implements Comparable{
 							info.onPacket(((PacketPlayerList) o).player);
 						} else{
 							if(o instanceof PacketPing){
-								Util.notification("Ping: "+(System.currentTimeMillis() - ((PacketPing) o).ms)+"");
+								Util.notification("Ping: "+(System.currentTimeMillis() - ping)+"");
 							} else{
 								if(o instanceof PacketChanged){
 									PacketChanged c = ((PacketChanged) o);
@@ -97,7 +98,7 @@ public class Game implements Comparable{
 	public boolean isInGame(){return ingame;}
 	public GameInfo getInfo(){return info;}
 	public Spiel getSpiel(){return spiel;}
-	public void testPing(){send(new PacketPing(System.currentTimeMillis()));}
+	public void testPing(){ping = System.currentTimeMillis(); send(new PacketPing());}
 	public boolean isJoined(){return isjoined;}
 	public boolean hatBeschreibung(){return !detail.isEmpty();}
 	public String getBeschreibung(){return detail;}
