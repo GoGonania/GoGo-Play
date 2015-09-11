@@ -91,7 +91,7 @@ public class Util implements ApplicationListener{
 			while((b = in.read()) != -1){s += (char) b;}
 			return s;
 		}catch (Exception e){
-			notificationRed("Keine Internetverbindung!");
+			if(!hidden) notificationRed("Keine Internetverbindung!");
 			return hidden?null:"";
 		}
 	}
