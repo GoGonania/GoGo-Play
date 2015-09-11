@@ -26,6 +26,6 @@ public class Progress extends TextObjekt{
 		if(!getText().isEmpty()) renderText(getText());
 	}
 	
-	public void setProgress(float n){p = n;}
+	public void setProgress(float n){p = Math.min(1, n);}
 	public void setText(String t){super.setText("  "+t+"");}
 }

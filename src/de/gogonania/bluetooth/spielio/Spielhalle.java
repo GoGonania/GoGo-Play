@@ -10,6 +10,7 @@ public class Spielhalle{
 		
 		add("GoGoCraft");
 		add("GoGoKlicker");
+		add("Reaction");
 		
 		Collections.sort(spiele);
 	}
