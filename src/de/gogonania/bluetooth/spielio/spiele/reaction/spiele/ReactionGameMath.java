@@ -66,6 +66,6 @@ public class ReactionGameMath extends ReactionGame{
 	}
 
 	public long getTime(){
-		return 8000;
+		return 6000;
 	}
 }

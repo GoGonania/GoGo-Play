@@ -46,7 +46,7 @@ public class SzeneReaction extends GameSzene<ClientReaction>{
 	}
 	
 	public void open(){
-		player = new Text("", 0, (Gdx.graphics.getHeight()-barheight)/2F, Gdx.graphics.getWidth(), Color.WHITE);
+		player = new Text("", Gdx.graphics.getWidth()/200F, (Gdx.graphics.getHeight()-barheight)/2F, Gdx.graphics.getWidth(), Color.WHITE);
 		player.setAlignment(Align.left);
 		setObjekt(player);
 		p = new Progress(0, Gdx.graphics.getHeight()-barheight, Gdx.graphics.getWidth(), barheight, Bilder.bar, Bilder.cyellow, Color.BLACK, fontbig);

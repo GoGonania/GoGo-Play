@@ -51,16 +51,21 @@ public class ReactionGameNames extends ReactionGame{
 	}
 
 	public void create(){
-		ArrayList<String> namen = new ArrayList<String>();
+		ArrayList<String> n = new ArrayList<String>();
 		for(PlayerInfo p : GameUtil.game.getInfo().getInfos()){
-			namen.add(p.getName());
+			n.add(p.getName());
 		}
-		Collections.shuffle(namen);
-		this.namen = (String[]) namen.toArray();
+		Collections.shuffle(n);
+		namen = new String[n.size()];
+		int i = 0;
+		for(String nn : n){
+			namen[i] = nn;
+			i++;
+		}
 	}
 	
 	public void load(Object[] data){
-		namen = (String[]) data[1];
+		namen = (String[]) data[0];
 	}
 	
 	public Object[] getData(){
