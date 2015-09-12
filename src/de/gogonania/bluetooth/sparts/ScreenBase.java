@@ -14,6 +14,7 @@ import de.gogonania.bluetooth.objekte.TextObjekt;
 import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.SelectListener;
+import de.gogonania.bluetooth.util.Confirms;
 
 public abstract class ScreenBase extends Szene{
 	public abstract Szene getPreSzene();
@@ -60,7 +61,7 @@ public abstract class ScreenBase extends Szene{
 	public void onBack(){
 		Szene s = getPreSzene();
 		if(s == null){
-			Util.killConfirm();
+			Confirms.kill();
 		} else{
 			Util.setSzene(s);
 		}

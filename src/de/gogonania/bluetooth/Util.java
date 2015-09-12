@@ -126,24 +126,6 @@ public class Util implements ApplicationListener{
 		}
 	}
 	
-	public static void kill(){
-		ping("Kill", false);
-		Spielstand.save();
-		MainActivity.close();
-		vib();
-		System.exit(0);
-	}
-	
-	public static void killConfirm(){
-		Fenster.confirm("Willst du "+getAppName()+" wirklich beenden?", new Listener(){
-				public void ready(String s){
-					if(s != null){
-						Util.kill();
-					}
-				}
-			});
-	}
-	
 	public static String makeNiceZahl(long geld){
 		String e = geld < 0?"-":""; 
 		geld = Math.abs(geld); 

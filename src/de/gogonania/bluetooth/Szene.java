@@ -76,6 +76,7 @@ public class Szene{
 		
 		renderObjekts();
 		render();
+		if(dialog != null) dialog.render();
 		Overlays.render();
 		onUpdate();
 		batch.end();
@@ -98,7 +99,6 @@ public class Szene{
 			if(o.isHidden()) continue;
 			o.render();
 		}
-		if(dialog != null) dialog.render();
 	}
 	
 	public void onClick(){

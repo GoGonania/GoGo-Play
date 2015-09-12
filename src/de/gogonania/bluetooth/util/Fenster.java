@@ -20,18 +20,6 @@ import de.gogonania.bluetooth.objekte.dialoge.DialogConfirm;
 import de.gogonania.bluetooth.objekte.dialoge.DialogWait;
 
 public class Fenster{
-	private static void v(){
-		Util.vib();
-	}
-	
-	private static void s(final AlertDialog.Builder a){
-		MainActivity.getThis().runOnUiThread(new Runnable(){
-			public void run(){
-				a.show();
-			}
-		});
-	}
-	
 	public static void prompt(String m, String t, Listener l){
 		prompt(m, t, "", l);
 	}
@@ -46,7 +34,7 @@ public class Fenster{
 				alert.setView(input);
 				alert.setPositiveButton("Fertig", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
-							v();
+							Util.vib();
 							Gdx.app.postRunnable(new Runnable(){
 									public void run(){
 										l.ready(input.getText().toString().replace("\n", "").trim());
@@ -56,7 +44,7 @@ public class Fenster{
 					});
 				alert.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
-							v();
+							Util.vib();
 							Gdx.app.postRunnable(new Runnable(){
 									public void run(){
 										l.ready(null);
@@ -81,10 +69,14 @@ public class Fenster{
 		final AlertDialog.Builder alert = create(m, t);
 		alert.setPositiveButton("Verstanden", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-					v();
+					Util.vib();
 				}
 			});
-		s(alert);
+		MainActivity.getThis().runOnUiThread(new Runnable(){
+				public void run(){
+					alert.show();
+				}
+			});
 	}
 	
 	private static AlertDialog.Builder create(String m, String t){
@@ -105,7 +97,7 @@ public class Fenster{
 		b.setView(bar); 
 		b.setPositiveButton("Fertig", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton){
-					v();
+					Util.vib();
 					l.ok(bar.getProgress()+min);
 				}
 			});
@@ -132,13 +124,13 @@ public class Fenster{
 		final AlertDialog.Builder b = create("", titel);
 		if(z) b.setPositiveButton("Zufall", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-					v();
+					Util.vib();
 					s.selected(Util.random(0, options.length-1));
 				}
 			});
 		b.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-					v();
+					Util.vib();
 				}
 			});
 		MainActivity.getThis().runOnUiThread(new Runnable(){
@@ -170,12 +162,8 @@ public class Fenster{
 		new Thread(new Runnable(){
 			public void run(){
 				r.run();
-				MainActivity.getThis().runOnUiThread(new Runnable(){
-					public void run(){
-						dialog.hide();
-						if(d != null) d.run();
-					}
-				});
+				dialog.hide();
+				if(d != null) d.run();
 			}
 		}).start();
 	}

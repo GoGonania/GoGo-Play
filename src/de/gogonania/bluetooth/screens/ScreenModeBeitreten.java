@@ -14,8 +14,8 @@ import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.SelectListener;
 
 public class ScreenModeBeitreten extends ScreenBase{
-	public Szene getPreSzene() {return new ScreenMain();}
-	public String getTitle() {return "Einem Spiel beitreten";}
+	public Szene getPreSzene(){return new ScreenMain();}
+	public String getTitle(){return "Einem Spiel beitreten";}
 	
 	private Wait w;
 	private Text info;

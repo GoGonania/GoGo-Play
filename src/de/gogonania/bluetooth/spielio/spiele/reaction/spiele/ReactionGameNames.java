@@ -60,10 +60,12 @@ public class ReactionGameNames extends ReactionGame{
 	}
 	
 	public void load(Object[] data){
-		namen = (String[]) data;
+		namen = (String[]) data[1];
 	}
 	
 	public Object[] getData(){
-		return namen;
+		Object[] d = new Object[1];
+		d[0] = namen;
+		return d;
 	}
 }

@@ -11,6 +11,8 @@ import de.gogonania.bluetooth.packete.PacketMessage;
 import de.gogonania.bluetooth.io.Person;
 import de.gogonania.bluetooth.spielio.save.Spielsaves;
 import de.gogonania.bluetooth.screens.ScreenSpielstände;
+import de.gogonania.bluetooth.Spielstand;
+import de.gogonania.bluetooth.MainActivity;
 
 public class Confirms{
 	public static void closeGameClient(){
@@ -18,6 +20,17 @@ public class Confirms{
 			public void run(){
 				Wifi.close();
 				Util.setSzene(new ScreenMain());
+			}
+		});
+	}
+
+	public static void kill(){
+		c(Util.getAppName()+" beenden", new Runnable(){
+			public void run(){
+				Util.ping("Kill", false);
+				Spielstand.save();
+				MainActivity.close();
+				System.exit(0);
 			}
 		});
 	}
