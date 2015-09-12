@@ -16,15 +16,10 @@ import de.gogonania.bluetooth.util.Grid;
 import java.util.Collections;
 
 public class ReactionGameNames extends ReactionGame{
+	private String[] namen;
 	
 	public void open(){
-		ArrayList<String> namen = new ArrayList<String>();
-		for(PlayerInfo p : GameUtil.game.getInfo().getInfos()){
-			namen.add(p.getName());
-		}
-		Collections.shuffle(namen);
-		
-		Grid g = new Grid(namen.size(), 0.1F, 0.4F){
+		Grid g = new Grid(namen.length, 0.1F, 0.4F){
 			public float getHeightMargin(){
 				return Gdx.graphics.getHeight()*0.6F;
 			}
@@ -55,7 +50,20 @@ public class ReactionGameNames extends ReactionGame{
 		return 2000;
 	}
 
-	public void create(){}
-	public void load(Object[] data){}
-	public Object[] getData(){return null;}
+	public void create(){
+		ArrayList<String> namen = new ArrayList<String>();
+		for(PlayerInfo p : GameUtil.game.getInfo().getInfos()){
+			namen.add(p.getName());
+		}
+		Collections.shuffle(namen);
+		this.namen = (String[]) namen.toArray();
+	}
+	
+	public void load(Object[] data){
+		namen = (String[]) data;
+	}
+	
+	public Object[] getData(){
+		return namen;
+	}
 }
