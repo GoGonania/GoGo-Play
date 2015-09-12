@@ -32,11 +32,9 @@ public class TextObjekt extends Objekt{
 	}
 	
 	public void renderText(String text){
-		Szene.batch.begin();
 		color.a = getAlpha();
 		glyph.setText(font, text, color, getWidth(), a, true);
 	    font.draw(Szene.batch, glyph, getX(), getY() + getHeight()/2 + glyph.height/2);
-		Szene.batch.end();
 	}
 
 	public Color getTextColor(){return color;}

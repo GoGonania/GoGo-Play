@@ -1,7 +1,6 @@
 package de.gogonania.bluetooth.spielio.spiele.gogocraft;
 import com.badlogic.gdx.math.Rectangle;
 
-import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.spielio.spiele.gogocraft.packete.PacketBlock;
 import de.gogonania.bluetooth.util.Bild;
@@ -20,8 +19,7 @@ public class Block{
 	public void draw(){
 		Bild b = material.getBild();
 		if(b != null){
-			b.getSprite().setBounds(r.getX(), r.getY(), r.getWidth(), r.getHeight());
-			b.getSprite().draw(Szene.batch, 1);
+			b.render(r.getX(), r.getY(), r.getWidth(), r.getHeight(), 1);
 		}
 	}
 	

@@ -1,6 +1,10 @@
 package de.gogonania.bluetooth.util;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.Gdx;
+
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,12 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SeekBar;
-import com.badlogic.gdx.Gdx;
 import de.gogonania.bluetooth.MainActivity;
 import de.gogonania.bluetooth.R;
 import de.gogonania.bluetooth.Util;
-import java.util.ArrayList;
-import java.util.List;
+import de.gogonania.bluetooth.objekte.dialoge.Dialog;
+import de.gogonania.bluetooth.objekte.dialoge.DialogConfirm;
+import de.gogonania.bluetooth.objekte.dialoge.DialogWait;
 
 public class Fenster{
 	private static void v(){
@@ -65,29 +69,12 @@ public class Fenster{
 		});
 	}
 
-	public static void confirm(String m, String t, final Listener l){
-		final AlertDialog.Builder alert = create(m, t);
-		alert.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					v();
-					Gdx.app.postRunnable(new Runnable(){
-						public void run(){
-							l.ready("");
-						}
-					});
-				}
-			});
-		alert.setNegativeButton("Nein", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					v();
-					Gdx.app.postRunnable(new Runnable(){
-							public void run(){
-								l.ready(null);
-							}
-						});
-				}
-			});
-		s(alert);
+	public static void confirm(String m, final Listener l){
+		new DialogConfirm(m){
+			public void ok(String s) {
+				l.ready(s);
+			}
+		}.show();
 	}
 
 	public static void alert(String m, String t){
@@ -107,10 +94,6 @@ public class Fenster{
 		alert.setIcon(R.drawable.logo);
 		alert.setCancelable(false);
 		return alert;
-	}
-	
-	public static void hinweis(String text){
-		alert(text, "Hinweis - Wichtig!");
 	}
 	
 	public static void slider(final String m, String t, final SliderListener l, final int min, int max, int p){
@@ -181,31 +164,20 @@ public class Fenster{
 		});
 	}
 	
-	static ProgressDialog dialog;
 	public static void progress(final Runnable r, final Runnable d, final String text){
-		MainActivity.getThis().runOnUiThread(new Runnable(){
-				public void run(){
-					dialog = new ProgressDialog(MainActivity.getThis());
-					dialog.setCancelable(false);
-					dialog.setCanceledOnTouchOutside(false);
-					dialog.setMessage(text);
-					dialog.setIndeterminate(true);
-					dialog.show();
-					new Thread(new Runnable(){
-						public void run(){
-							r.run();
-							MainActivity.getThis().runOnUiThread(new Runnable(){
-								public void run(){
-									while(dialog.isShowing()){
-										dialog.dismiss();
-									}
-									if(d != null) d.run();
-								}
-							});
-						}
-					}).start();
-				}
-			});
+		final Dialog dialog = new DialogWait(text);
+		dialog.show();
+		new Thread(new Runnable(){
+			public void run(){
+				r.run();
+				MainActivity.getThis().runOnUiThread(new Runnable(){
+					public void run(){
+						dialog.hide();
+						if(d != null) d.run();
+					}
+				});
+			}
+		}).start();
 	}
 
 	public static void progress(final long time, Runnable r, String text){

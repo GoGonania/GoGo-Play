@@ -1,20 +1,14 @@
 package de.gogonania.bluetooth.objekte;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
-import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.util.Bild;
 
 public class Objekt{
 	private boolean activ = true;
 	private boolean hide;
-
 	private Rectangle r;
-	
 	private Bild cNormal;
-	private Color border;
 
 	public Objekt(float x, float y, float width, float height, Bild background){
 		r = new Rectangle(x, y, width, height);
@@ -22,27 +16,7 @@ public class Objekt{
 	}
 
 	public void render(){
-		if(border != null){
-			Szene.x.begin(ShapeRenderer.ShapeType.Line);
-			Szene.x.setColor(border);
-			Szene.x.rect(getX()-1, getY()-1, getWidth()+2, getHeight()+2);
-			Szene.x.end();
-		}
-		
-		Bild b = getBild();
-		if(b != null){
-			if(b.hatColor() && !(this instanceof Button)){
-				Szene.x.begin(ShapeRenderer.ShapeType.Filled);
-				Szene.x.setColor(b.getColor());
-				Szene.x.rect(getX(), getY(), getWidth(), getHeight());
-				Szene.x.end();
-			} else{
-				Szene.batch.begin();
-				b.getSprite().setBounds(getX(), getY(), getWidth(), getHeight());
-				b.getSprite().draw(Szene.batch, getAlpha());
-				Szene.batch.end();
-			}
-		}
+		if(getBild() != null) getBild().render(getX(), getY(), getWidth(), getHeight(), getAlpha());
 	}
 
 	public boolean onClick(){
@@ -59,7 +33,6 @@ public class Objekt{
 	public float getHeight(){return r.getHeight()*getScale();}
 	public boolean isHidden(){return hide;}
 
-	public void setBorder(Color c){border = c;}
 	public void setX(float n){r.setX(n);}
 	public void setY(float n){r.setY(n);}
 	public void setWidth(float n){r.setWidth(n);}

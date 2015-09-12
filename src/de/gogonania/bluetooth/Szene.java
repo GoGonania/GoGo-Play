@@ -1,28 +1,30 @@
 package de.gogonania.bluetooth;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
+
+import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.objekte.Objekt;
+import de.gogonania.bluetooth.objekte.dialoge.Dialog;
 import de.gogonania.bluetooth.objekte.overlays.Overlays;
 import de.gogonania.bluetooth.util.Bild;
-import java.util.ArrayList;
-import de.gogonania.bluetooth.objekte.Button;
-import com.badlogic.gdx.graphics.Color;
 import de.gogonania.bluetooth.util.Bilder;
 
 public class Szene{
 	private boolean open;
 	private Bild background;
 	
+	public static Dialog dialog;
 	private static boolean clicked;
 	private static long last;
 	public static SpriteBatch batch;
-	public static ShapeRenderer x;
 	private static FreeTypeFontGenerator generator;
 	
 	public static BitmapFont fontlittle;
@@ -40,7 +42,6 @@ public class Szene{
 	public static void init(){
 		batch = new SpriteBatch();
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
-		x = new ShapeRenderer();
 		font = generateFont(1);
 		fontlittle = generateFont(0.75F);
 		fontnotification = generateFont(0.9F);
@@ -63,23 +64,13 @@ public class Szene{
 	}
 	
 	public void onRender(OrthographicCamera cam){
-		x.setProjectionMatrix(cam.combined);
 		batch.setProjectionMatrix(cam.combined);
+		batch.begin();
 		Vector3 v = cam.unproject(new Vector3(0, Gdx.graphics.getHeight(), 0));
 		
 		if(isClosed()) onOpen();
 		
-		if(background.hatColor()){
-			x.begin(ShapeRenderer.ShapeType.Filled);
-			x.setColor(background.getColor());
-			x.rect(0, v.y, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-			x.end();
-		} else{
-			batch.begin();
-			background.getSprite().setBounds(0, v.y, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-			background.getSprite().draw(batch);
-			batch.end();
-		}
+		background.render(0, v.y, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1);
 		
 		if(isClosed()) onOpen();
 		
@@ -87,6 +78,7 @@ public class Szene{
 		render();
 		Overlays.render();
 		onUpdate();
+		batch.end();
 	}
 	
 	public void onUpdate(){
@@ -106,9 +98,11 @@ public class Szene{
 			if(o.isHidden()) continue;
 			o.render();
 		}
+		if(dialog != null) dialog.render();
 	}
 	
 	public void onClick(){
+		if(dialog != null && dialog.onClick()) return;
 		if(Overlays.onClick()) return;
 		for(Objekt o : objekte){
 			if(o.onClick()) return;

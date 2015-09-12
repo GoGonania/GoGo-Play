@@ -2,11 +2,10 @@ package de.gogonania.bluetooth.objekte;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Align;
 
-import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
+import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.Listener;
 
@@ -38,14 +37,7 @@ public class Input extends TextObjekt{
 	}
 
 	public void render(){
-		Szene.x.begin(ShapeRenderer.ShapeType.Line);
-		Szene.x.setColor(getTextColor());
-		Szene.x.rect(getX(), getY(), getWidth(), 1);
-		if(!isHovered(Gdx.input.isTouched())){
-			Szene.x.rect(getX(), getY(), 1, getHeight()/5F);
-			Szene.x.rect(getX()+getWidth(), getY(), 1, getHeight()/5F);
-		}
-		Szene.x.end();
+		Bilder.cwhite.render(getX(), getY(), getWidth(), 1, 1);
 		super.render();
 	}
 

@@ -14,7 +14,7 @@ import de.gogonania.bluetooth.screens.ScreenSpielstände;
 
 public class Confirms{
 	public static void closeGameClient(){
-		c("das", "Spiel verlassen", new Runnable(){
+		c("das Spiel verlassen", new Runnable(){
 			public void run(){
 				Wifi.close();
 				Util.setSzene(new ScreenMain());
@@ -23,7 +23,7 @@ public class Confirms{
 	}
 	
 	public static void closeGameServer(){
-		c("das", "Spiel beenden", new Runnable(){
+		c("das Spiel beenden", new Runnable(){
 			public void run(){
 				GameUtil.game.server.close("Spiel wurde vom Besitzer beendet");
 			}
@@ -53,7 +53,7 @@ public class Confirms{
 	}
 	
 	public static void kickPlayer(final IPerson p){
-		c("", p.getName()+" entfernen", new Runnable(){
+		c(""+p.getName()+" entfernen", new Runnable(){
 			public void run(){
 				GameUtil.game.server.getWarteschlange().send(PacketKick.create("Du wurdest vom Besitzer entfernt"), p);
 				GameUtil.game.server.remove((Person) p);
@@ -70,7 +70,7 @@ public class Confirms{
 	}
 	
 	public static void removeSpielstand(final Spielsave s){
-		c("diesen Spielstand:", s.getDetail()+" löschen", new Runnable(){
+		c("den Spielstand: '"+s.getDetail()+"' löschen", new Runnable(){
 			public void run() {
 				s.remove();
 				Util.notificationRed(s.getDetail()+" wurde gelöscht");
@@ -84,7 +84,7 @@ public class Confirms{
 	
 	public static void removeSpielstand(){
 		if(!Spielsaves.hatSpielstände())
-		c("alle", "Spielstände löschen", new Runnable(){
+		c("alle Spielstände löschen", new Runnable(){
 			public void run(){
 				while(Spielsaves.hatSpielstände()){
 					Util.random(Spielsaves.saves).remove();
@@ -96,15 +96,14 @@ public class Confirms{
 	}
 	
 	public static void saveGame(final Spielsave s){
-		c("diesen Spielstand:", s.getDetail()+" überschreiben", new Runnable(){
+		c("den Spielstand: '"+s.getDetail()+"' überschreiben", new Runnable(){
 				public void run() {
 					GameUtil.game.server.save(s);
 				}});
 	}
 	
-	private static void c(String m, String t, final Runnable r){
-		if(!m.isEmpty()) m += " ";
-		Fenster.confirm("Willst du wirklich "+m+""+t+"?", t+"?", new Listener(){
+	private static void c(String m, final Runnable r){
+		Fenster.confirm("Willst du "+m+"?", new Listener(){
 			public void ready(String s){
 				if(s != null){
 					try{

@@ -65,7 +65,7 @@ public class Util implements ApplicationListener{
 				}
 			}
 		} else{
-			if(!isSwitching() && Gdx.input.isTouched() && Overlays.canScroll()){
+			if(Szene.dialog == null && !isSwitching() && Gdx.input.isTouched() && Overlays.canScroll()){
 				if(lasty != -1) cam.translate(0, scroll*(Gdx.input.getY()-lasty));
 				lasty = Gdx.input.getY();
 				if(cam.position.y > Gdx.graphics.getHeight()/2F) undoScroll();
@@ -135,7 +135,7 @@ public class Util implements ApplicationListener{
 	}
 	
 	public static void killConfirm(){
-		Fenster.confirm("Willst du das Spiel wirklich beenden?", ""+getAppName()+" beenden", new Listener(){
+		Fenster.confirm("Willst du "+getAppName()+" wirklich beenden?", new Listener(){
 				public void ready(String s){
 					if(s != null){
 						Util.kill();

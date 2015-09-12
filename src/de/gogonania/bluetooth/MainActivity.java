@@ -65,7 +65,7 @@ public class MainActivity extends AndroidApplication{
 	
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 	    if (keyCode == KeyEvent.KEYCODE_MENU) {
-	        Util.getSzene().onMenu();
+	    	if(Util.isSwitching() || Szene.dialog != null){} else{Util.getSzene().onMenu();}
 	        return true;
 	    } else {
 	        return super.onKeyUp(keyCode, event);
@@ -73,7 +73,7 @@ public class MainActivity extends AndroidApplication{
 	}
 
 	public void onBackPressed(){
-		if(Util.isSwitching()) return;
+		if(Util.isSwitching() || Szene.dialog != null) return;
 		Util.getSzene().onBack();
 	}
 	

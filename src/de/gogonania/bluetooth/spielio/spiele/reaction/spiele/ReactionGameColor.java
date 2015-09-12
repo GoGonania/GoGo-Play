@@ -1,7 +1,6 @@
 package de.gogonania.bluetooth.spielio.spiele.reaction.spiele;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Rectangle;
 
 import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
@@ -9,7 +8,6 @@ import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.spielio.spiele.SzeneReaction;
 import de.gogonania.bluetooth.spielio.spiele.reaction.ReactionGame;
 import de.gogonania.bluetooth.util.Bilder;
-import de.gogonania.bluetooth.util.Grid;
 
 public class ReactionGameColor extends ReactionGame{
 	private boolean[] ops;

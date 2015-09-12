@@ -1,5 +1,4 @@
 package de.gogonania.bluetooth.spielio.spiele;
-import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.io.GameUtil;
 import de.gogonania.bluetooth.spielio.GameSzene;
@@ -13,11 +12,9 @@ public class SzeneGoGoCraft extends GameSzene<ClientGoGoCraft>{
 	
 	public void render(){
 		if(!GameUtil.hatSpiel()) return;
-		Szene.batch.begin();
 		for(Block b : getClient().blocks){
 			b.draw();
 		}
-		Szene.batch.end();
 	}
 	
 	public void click(){

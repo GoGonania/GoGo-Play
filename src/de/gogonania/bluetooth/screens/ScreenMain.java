@@ -45,7 +45,6 @@ public class ScreenMain extends ScreenBase{
 		});
 		TextObjekt name = new TextObjekt("Eingeloggt als "+Util.name, 0, 0, getBarHeight()*5, getBarHeight()/1.5F, Bilder.bar, Color.BLACK, fontlittle);
 		name.setActive(false);
-		name.setBorder(Color.BLACK);
 		setObjekt(name);
 		
 		add("Spiel erstellen", new ScreenModeErstellen());
