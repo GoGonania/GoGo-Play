@@ -20,6 +20,7 @@ public class Spielstand{
 		spe.putBoolean("a", Util.a);
 		spe.putString("name", Util.name);
 		spe.putBoolean("vib", Util.vib);
+		spe.putBoolean("b", Util.b);
 		
 		spe.commit();
 		
@@ -34,6 +35,7 @@ public class Spielstand{
 		Util.a = sp.getBoolean("a", true);
 		Util.name = sp.getString("name", "User"+Util.random(10000, 99999)+"");
 		Util.vib = sp.getBoolean("vib", true);
+		Util.b = sp.getBoolean("b", true);
 		
 		saveSpiele = new SaveManager("1");
 		

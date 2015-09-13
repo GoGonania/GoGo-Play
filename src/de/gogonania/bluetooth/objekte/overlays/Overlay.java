@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.util.Bild;
-import de.gogonania.bluetooth.util.io.SaveItem;
 
 public abstract class Overlay extends Button implements Comparable<Overlay>{
 	public abstract void update();
@@ -22,7 +21,6 @@ public abstract class Overlay extends Button implements Comparable<Overlay>{
 	
 	private Runnable r;
 	private boolean f;
-	public SaveItem save;
 	public long last;
 	
 	public Overlay(Bild b, Runnable r){

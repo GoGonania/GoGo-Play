@@ -52,6 +52,14 @@ public class ScreenEinstellungen extends ScreenAktionenBase{
 		
 		skip(2);
 		
+		add("Animierter\nHintergrund", Util.b?Bilder.cgreen:Bilder.cred, new Runnable(){
+			public void run(){
+				Util.b = !Util.b;
+				Util.vib();
+				Util.refreshScreen();
+			}
+		});
+		
 		add("Animationen", Util.a?Bilder.cgreen:Bilder.cred, new Runnable(){
 			public void run(){
 				Util.a = !Util.a;

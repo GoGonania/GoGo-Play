@@ -55,13 +55,15 @@ public abstract class ScreenBase extends Szene{
 	}
 	
 	public void renderObjekts(){
-		Background.render();
+		if(Util.b) Background.render();
 		super.renderObjekts();
 	}
 	
 	public void click() {
-		Util.vib();
-		Background.add(Util.getX(), Util.getY());
+		if(Util.b){
+			Util.vib();
+		    Background.add(Util.getX(), Util.getY());
+		}
 	}
 	
 	public void onBack(){

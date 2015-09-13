@@ -36,6 +36,7 @@ public class Util implements ApplicationListener{
 	public static String name;
 	public static boolean vib;
 	public static int rt;
+	public static boolean b;
 	
 	private static float lasty = -1;
 	
