@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 public class Bilder{
 	public static Bild background;
 	public static Bild logo;
-	public static Bild himmel;
 	public static Bild bar;
 	
 	public static Bild normal;
@@ -15,17 +14,12 @@ public class Bilder{
 	public static Bild cwhite;
 	public static Bild cdgray;
 	
-	public static Bild blockgras;
-	public static Bild blockerde;
-	public static Bild blockstein;
-	
 	public static Bild cookie;
 	public static Bild cookiegold;
 	
 	public static void init(){
 		background = new Bild("background.jpg");
 		logo = new Bild("logo.png");
-		himmel = new Bild("himmel.jpg");
 		bar = new Bild("bar.jpg");
 		
 		normal = new Bild(Color.valueOf("3399ff"));
@@ -36,15 +30,7 @@ public class Bilder{
 		cdgray = new Bild(Color.DARK_GRAY);
 		cwhite = new Bild(Color.WHITE);
 		
-		blockerde = block("erde");
-		blockgras = block("gras");
-		blockstein = block("stein");
-		
 		cookie = new Bild("cookie.png");
 		cookiegold = new Bild("cookie_gold.png");
-	}
-	
-	private static Bild block(String name){
-		return new Bild("blocks/"+name+".png");
 	}
 }

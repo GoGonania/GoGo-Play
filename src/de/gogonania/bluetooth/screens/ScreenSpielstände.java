@@ -48,7 +48,7 @@ public class ScreenSpielstände extends ScreenAktionenBase{
 			add(s.getName()+"\n"+s.getTime(), new Runnable(){
 				public void run(){
 					Util.vib();
-					Fenster.select(s.getDetail(), new String[]{"Spielstand laden", "Spielstand löschen"}, false, new SelectListener() {
+					Fenster.select(s.getDetail(), new String[]{"Laden", "Löschen"}, new SelectListener() {
 						public void selected(int id) {
 							switch(id){
 							case 0:

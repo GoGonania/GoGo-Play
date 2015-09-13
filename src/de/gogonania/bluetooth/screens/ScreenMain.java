@@ -18,7 +18,7 @@ import de.gogonania.bluetooth.spielio.save.Spielsaves;
 public class ScreenMain extends ScreenBase{
 	private Grid g = new Grid(1, 0.5F, 0.2F);
 	public Szene getPreSzene(){return null;}
-	public String getTitle(){return "Startseite";}
+	public String getTitle(){return Util.getAppName();}
 	
 	public void open(){
 		if(Spielsaves.hatSpielstände()) setAction("Spielstände verwalten", new ScreenSpielstände());

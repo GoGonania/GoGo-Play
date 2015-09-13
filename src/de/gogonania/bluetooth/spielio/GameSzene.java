@@ -23,7 +23,7 @@ public class GameSzene <T> extends Szene{
 	}
 	
 	public void onBack(){
-		Fenster.select("Was willst du machen?", !GameUtil.isOwner()?new String[]{"Nachricht senden", "Ping testen", "Spiel verlassen"}: new String[]{"Spiel speichern", "Nachricht senden", "Spieler entfernen", "Spiel beenden"}, false, new SelectListener(){
+		Fenster.select("Was willst du machen?", !GameUtil.isOwner()?new String[]{"Nachricht senden", "Ping testen", "Spiel verlassen"}: new String[]{"Spiel speichern", "Nachricht senden", "Spieler entfernen", "Spiel beenden"}, new SelectListener(){
 				public void selected(int id){
 					if(GameUtil.isOwner()){
 						switch(id){

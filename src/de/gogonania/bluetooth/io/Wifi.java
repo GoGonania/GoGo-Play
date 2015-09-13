@@ -11,7 +11,6 @@ import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.screens.ScreenKick;
-import de.gogonania.bluetooth.spielio.spiele.gogocraft.packete.PacketBlock;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketAddon;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketCookieClick;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketGold;
@@ -130,8 +129,6 @@ public class Wifi {
 		k.register(PacketBereit.class);
 		k.register(PacketRequestData.class);
 		k.register(PacketData.class);
-		
-		k.register(PacketBlock.class);
 		
 		k.register(PacketCookieClick.class);
 		k.register(PacketUpdate.class);

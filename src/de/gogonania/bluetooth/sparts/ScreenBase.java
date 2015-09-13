@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 
 import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
+import de.gogonania.bluetooth.gdx.Background;
 import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.objekte.Logo;
 import de.gogonania.bluetooth.objekte.TextObjekt;
@@ -36,7 +37,7 @@ public abstract class ScreenBase extends Szene{
 		action = new Button("", Gdx.graphics.getWidth()-actionwidth-getBarItemsMargin(), Gdx.graphics.getHeight()-getBarHeight()+getBarItemsMargin(), actionwidth, getBarHeight()-2*getBarItemsMargin(), Bilder.normal, Color.BLACK){
 			public void click(){
 				Util.vib();
-				Fenster.select(action.getText(), actiontext.toArray(), false, new SelectListener() {
+				Fenster.select(action.getText(), actiontext.toArray(), new SelectListener() {
 						public void selected(int id) {
 							actions.get(id).run();
 						}
@@ -53,9 +54,14 @@ public abstract class ScreenBase extends Szene{
 		onUpdate();
 	}
 	
-	public void onMenu(){
-		if(action.isHidden()) return;
-		action.click();
+	public void renderObjekts(){
+		Background.render();
+		super.renderObjekts();
+	}
+	
+	public void click() {
+		Util.vib();
+		Background.add(Util.getX(), Util.getY());
 	}
 	
 	public void onBack(){

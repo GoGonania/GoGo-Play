@@ -18,7 +18,7 @@ public class Progress extends TextObjekt{
 	
 	public void render(){
 		super.render();
-		pb.render(getX()+m, getY()+m, (getWidth()-2*m)*p, getHeight()-2*m, 1);
+		pb.render(getX()+m, getY()+m, (getWidth()-2*m)*p, getHeight()-2*m);
 		if(!getText().isEmpty()) renderText(getText());
 	}
 	

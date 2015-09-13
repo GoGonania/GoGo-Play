@@ -6,7 +6,6 @@ import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.io.Game;
 import de.gogonania.bluetooth.io.GameUtil;
 import de.gogonania.bluetooth.sparts.ScreenBase;
-import de.gogonania.bluetooth.szenen.SzeneJoin;
 import de.gogonania.bluetooth.util.GridText;
 
 public class ScreenSpielInfo extends ScreenBase{

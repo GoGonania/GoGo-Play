@@ -1,26 +1,26 @@
 package de.gogonania.bluetooth;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
-import de.gogonania.bluetooth.szenen.SzeneStartup;
+
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import de.gogonania.bluetooth.gdx.Background;
+import de.gogonania.bluetooth.objekte.overlays.Overlays;
+import de.gogonania.bluetooth.screens.SzeneStartup;
 import de.gogonania.bluetooth.util.Bild;
 import de.gogonania.bluetooth.util.Bilder;
-import de.gogonania.bluetooth.util.Fenster;
-import de.gogonania.bluetooth.util.Listener;
 import de.gogonania.bluetooth.util.Notification;
-import java.util.ArrayList;
-import de.gogonania.bluetooth.objekte.overlays.Overlays;
-import android.content.Intent;
-import android.net.Uri;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLEncoder;
 import de.gogonania.bluetooth.util.Zeit;
 
 public class Util implements ApplicationListener{
@@ -114,7 +114,10 @@ public class Util implements ApplicationListener{
 	}
 	
 	public static void setSzene(Szene s, Anim an){
-		if(an != null) undoScroll();
+		if(an != null){
+			undoScroll();
+			Background.reset();
+		}
 		if(an != null && a){
 			if(!isSwitching()){
 				anim = szene.getCloseAnimation() != null?szene.getCloseAnimation():(s.getOpenAnimation() != null)?s.getOpenAnimation():an;
@@ -138,7 +141,7 @@ public class Util implements ApplicationListener{
 		return ""+e+""+s.toString()+"";
 	}
 	
-	public void resize(int arg0, int arg1) {}
+	public void resize(int arg0, int arg1){}
     public void pause(){}
 	public void resume(){}
 	public void dispose(){}

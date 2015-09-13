@@ -29,6 +29,6 @@ public class ScreenModeErstellen extends ScreenBase {
 		f.addInput("Besitzer: "+Util.name+"", "Beschreibung", true);
 		f.addInput("", "Passwort", true);
 		
-		setBigButton("Spiel erstellen", Util.getRunnable(new ScreenChooseGame(f), true));
+		setBigButton("Spiel auswählen", Util.getRunnable(new ScreenChooseGame(f), true));
 	}
 }

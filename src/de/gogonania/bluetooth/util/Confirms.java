@@ -27,10 +27,14 @@ public class Confirms{
 	public static void kill(){
 		c(Util.getAppName()+" beenden", new Runnable(){
 			public void run(){
-				Util.ping("Kill", false);
-				Spielstand.save();
-				MainActivity.close();
-				System.exit(0);
+				Fenster.progress(new Runnable(){
+					public void run(){
+						Util.ping("Kill", false);
+						Spielstand.save();
+						MainActivity.close();
+						System.exit(0);
+					}
+				}, null, "Spiel wird gespeichert...");
 			}
 		});
 	}
@@ -58,7 +62,7 @@ public class Confirms{
 		for(int i = 1; i < ps.size(); i++){
 			pn[i - 1] = ps.get(i).getName();
 		}
-		Fenster.select("Welchen Spieler willst du entfernen?", pn, false, new SelectListener(){
+		Fenster.select("Welchen Spieler willst du entfernen?", pn, new SelectListener(){
 				public void selected(int id){
 					kickPlayer(GameUtil.game.server.getPerson(pn[id]));
 				}

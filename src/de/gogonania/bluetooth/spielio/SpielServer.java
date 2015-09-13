@@ -4,8 +4,8 @@ import de.gogonania.bluetooth.io.GameUtil;
 import de.gogonania.bluetooth.io.IPerson;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.packete.PacketScreen;
+import de.gogonania.bluetooth.screens.SzeneGameLoading;
 import de.gogonania.bluetooth.spielio.save.Spielsave;
-import de.gogonania.bluetooth.szenen.SzeneGameLoading;
 import de.gogonania.bluetooth.io.PlayerInfo;
 import de.gogonania.bluetooth.packete.PacketBereit;
 

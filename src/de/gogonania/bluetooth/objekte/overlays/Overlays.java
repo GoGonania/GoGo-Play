@@ -1,12 +1,8 @@
 package de.gogonania.bluetooth.objekte.overlays;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import com.badlogic.gdx.Gdx;
-
-import de.gogonania.bluetooth.Spielstand;
 import de.gogonania.bluetooth.Util;
-import de.gogonania.bluetooth.util.io.SaveItem;
 
 public class Overlays{
 	private static ArrayList<Overlay> overlays = new ArrayList<Overlay>();
@@ -19,7 +15,6 @@ public class Overlays{
 		add(new OverlayNotification());
 		
 		sort();
-		save();
 	}
 	
 	public static boolean onClick(){
@@ -64,28 +59,9 @@ public class Overlays{
 	}
 	
 	private static void add(Overlay v){
-		SaveItem s = Spielstand.saveOverlays.get(overlays.size());
-		if(s == null){
-			s = Spielstand.saveOverlays.create();
-			v.setX(Util.random(0, (int) (Gdx.graphics.getWidth()-v.getWidth())));
-			v.setY(Util.random(0, (int) (Gdx.graphics.getHeight()-v.getHeight())));
-		} else{
-			v.setX(Float.parseFloat(s.get("x")));
-			v.setY(Float.parseFloat(s.get("y")));
-			v.last = Long.parseLong(s.get("l"));
-		}
-		v.save = s;
-		s.disableAutoSave();
+		v.setX(Util.random(0, (int) (Gdx.graphics.getWidth()-v.getWidth())));
+		v.setY(Util.random(0, (int) (Gdx.graphics.getHeight()-v.getHeight())));
 		overlays.add(v);
 		roverlays.add(v);
-	}
-	
-	public static void save(){
-		for(Overlay o : overlays){
-			o.save.set("x", ""+o.getX());
-			o.save.set("y", ""+o.getY());
-			o.save.set("l", ""+o.last);
-			o.save.save();
-		}
 	}
 }

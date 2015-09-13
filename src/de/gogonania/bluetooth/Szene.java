@@ -54,7 +54,6 @@ public class Szene{
 	public void update(){}
 	public void click(){}
 	public void onBack(){}
-	public void onMenu(){}
 	public Anim getOpenAnimation(){return null;}
 	public Anim getCloseAnimation(){return null;}
 	
@@ -70,7 +69,7 @@ public class Szene{
 		
 		if(isClosed()) onOpen();
 		
-		background.render(0, v.y, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1);
+		background.render(0, v.y, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		if(isClosed()) onOpen();
 		

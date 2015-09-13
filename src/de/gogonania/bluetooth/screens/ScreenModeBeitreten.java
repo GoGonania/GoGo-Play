@@ -28,7 +28,7 @@ public class ScreenModeBeitreten extends ScreenBase{
 	public void open(){
 		setAction("Nochmal suchen", new Runnable(){
 			public void run(){
-				Fenster.select("Wie willst du suchen?", new String[]{"Normal", "Doppelte Länge", "Dreifache Länge"}, false, new SelectListener(){
+				Fenster.select("Wie willst du suchen?", new String[]{"Normal", "Doppelte Länge", "Dreifache Länge"}, new SelectListener(){
 						public void selected(int id){
 							Util.setSzene(new ScreenModeBeitreten(id+1), null);
 						}

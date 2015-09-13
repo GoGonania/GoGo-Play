@@ -8,7 +8,6 @@ public class Spielhalle{
 	public static void init(){
 		spiele.clear();
 		
-		add("GoGoCraft");
 		add("GoGoKlicker");
 		add("Reaction");
 		

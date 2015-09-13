@@ -2,14 +2,12 @@ package de.gogonania.bluetooth;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import de.gogonania.bluetooth.objekte.overlays.Overlays;
 import de.gogonania.bluetooth.spielio.save.Spielsave;
 import de.gogonania.bluetooth.spielio.save.Spielsaves;
 import de.gogonania.bluetooth.util.io.SaveItem;
 import de.gogonania.bluetooth.util.io.SaveManager;
 
 public class Spielstand{
-	public static SaveManager saveOverlays;
 	public static SaveManager saveSpiele;
 	
 	static SharedPreferences sp;
@@ -22,8 +20,6 @@ public class Spielstand{
 		spe.putBoolean("a", Util.a);
 		spe.putString("name", Util.name);
 		spe.putBoolean("vib", Util.vib);
-		
-		Overlays.save();
 		
 		spe.commit();
 		
@@ -38,8 +34,7 @@ public class Spielstand{
 		Util.a = sp.getBoolean("a", true);
 		Util.name = sp.getString("name", "User"+Util.random(10000, 99999)+"");
 		Util.vib = sp.getBoolean("vib", true);
-
-		saveOverlays = new SaveManager("0");
+		
 		saveSpiele = new SaveManager("1");
 		
 		for(SaveItem s: saveSpiele.list()){

@@ -1,20 +1,19 @@
 package de.gogonania.bluetooth;
 
-import android.os.Bundle;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.os.PowerManager;
 import android.os.Vibrator;
-import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
+import de.gogonania.bluetooth.io.GameUtil;
 import de.gogonania.bluetooth.io.Wifi;
 import de.gogonania.bluetooth.objekte.Wait;
 import de.gogonania.bluetooth.util.Bilder;
-import android.content.Context;
-import android.view.WindowManager;
-import android.os.PowerManager;
-import de.gogonania.bluetooth.io.GameUtil;
-import android.view.Window;
 
 public class MainActivity extends AndroidApplication{
 	private static MainActivity a;
@@ -33,9 +32,9 @@ public class MainActivity extends AndroidApplication{
 		Wait.init();
 		v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		AndroidApplicationConfiguration conf = new AndroidApplicationConfiguration();
+		conf.useAccelerometer = true;
 		conf.numSamples = 2;
 		conf.disableAudio = true;
-		conf.useAccelerometer = false;
 		conf.useCompass = false;
 		initialize(new Util(), conf);
 		Gdx.graphics.setVSync(false);
@@ -62,19 +61,13 @@ public class MainActivity extends AndroidApplication{
 		Spielstand.save();
 		super.onPause();
 	}
-	
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-	    if (keyCode == KeyEvent.KEYCODE_MENU) {
-	    	if(Util.isSwitching() || Szene.dialog != null){} else{Util.getSzene().onMenu();}
-	        return true;
-	    } else {
-	        return super.onKeyUp(keyCode, event);
-	    }
-	}
 
 	public void onBackPressed(){
-		if(Util.isSwitching() || Szene.dialog != null) return;
-		Util.getSzene().onBack();
+		if(Util.isSwitching() || Szene.dialog != null){
+			if(Szene.dialog != null) Szene.dialog.cancel();
+		} else{
+			Util.getSzene().onBack();
+		}
 	}
 	
 	public static void close(){wakeLock.release();}

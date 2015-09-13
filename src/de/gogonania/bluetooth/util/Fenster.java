@@ -1,22 +1,17 @@
 package de.gogonania.bluetooth.util;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import de.gogonania.bluetooth.MainActivity;
 import de.gogonania.bluetooth.R;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.objekte.dialoge.Dialog;
+import de.gogonania.bluetooth.objekte.dialoge.DialogAlert;
 import de.gogonania.bluetooth.objekte.dialoge.DialogConfirm;
+import de.gogonania.bluetooth.objekte.dialoge.DialogSelect;
 import de.gogonania.bluetooth.objekte.dialoge.DialogWait;
 
 public class Fenster{
@@ -66,17 +61,7 @@ public class Fenster{
 	}
 
 	public static void alert(String m, String t){
-		final AlertDialog.Builder alert = create(m, t);
-		alert.setPositiveButton("Verstanden", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					Util.vib();
-				}
-			});
-		MainActivity.getThis().runOnUiThread(new Runnable(){
-				public void run(){
-					alert.show();
-				}
-			});
+		new DialogAlert(m, t).show();
 	}
 	
 	private static AlertDialog.Builder create(String m, String t){
@@ -116,44 +101,16 @@ public class Fenster{
 		});
 	}
 	
-	public static void select(String titel, final Object[] options, boolean z, final SelectListener s){
+	public static void select(String titel, Object[] options, final SelectListener s){
 		if(options.length == 1){
 			s.selected(0);
 			return;
 		}
-		final AlertDialog.Builder b = create("", titel);
-		if(z) b.setPositiveButton("Zufall", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					Util.vib();
-					s.selected(Util.random(0, options.length-1));
-				}
-			});
-		b.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					Util.vib();
-				}
-			});
-		MainActivity.getThis().runOnUiThread(new Runnable(){
-			public void run(){
-				ListView lv = new ListView(MainActivity.getThis());
-				b.setView(lv);
-				final AlertDialog a = b.create();
-				List<String> l = new ArrayList<String>();
-				for(Object o : options){
-					l.add(o.toString());
-				}
-				ArrayAdapter<String> aa = new ArrayAdapter<String>(MainActivity.getThis(), android.R.layout.simple_list_item_1, l);
-				lv.setAdapter(aa);
-				lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-						public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4){
-							Util.vib();
-							a.dismiss();
-							s.selected(p3);
-						}
-					});
-				a.show();
+		new DialogSelect(titel, options) {
+			public void selected(int id) {
+				s.selected(id);
 			}
-		});
+		}.show();
 	}
 	
 	public static void progress(final Runnable r, final Runnable d, final String text){

@@ -37,7 +37,7 @@ public class Input extends TextObjekt{
 	}
 
 	public void render(){
-		Bilder.cwhite.render(getX(), getY(), getWidth(), 1, 1);
+		Bilder.cwhite.render(getX(), getY(), getWidth(), 1);
 		super.render();
 	}
 

@@ -28,11 +28,10 @@ public class Wait extends Objekt{
 	
 	public Wait(float x, float y, float size){
 		super(x, y, size, size, new Bild("wait.png"));
-		getBild().getSprite().setOrigin(size/2f, size/2f);
 	}
 
 	public void render(){
-		getBild().getSprite().setRotation(r);
+		getBild().rotate(getWidth(), r);
 		super.render();
 	}
 }
