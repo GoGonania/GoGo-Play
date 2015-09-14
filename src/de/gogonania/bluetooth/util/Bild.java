@@ -24,18 +24,14 @@ public class Bild{
 	}
 	
 	public void render(float x, float y, float width, float height, float alpha, int r){
-		rotate(width, r);
+		s.setOrigin(width/2F, width/2F);
+		s.setRotation(r);
 		s.setBounds(x, y, width, height);
 		s.draw(Szene.batch, alpha);
 	}
 	
 	public void render(float x, float y, float width, float height){
 		render(x, y, width, height, 1, 0);
-	}
-	
-	public void rotate(float size, int r){
-		s.setOrigin(size/2F, size/2F);
-		s.setRotation(r);
 	}
 	
 	public Color getColor(){return c;}

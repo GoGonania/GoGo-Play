@@ -24,6 +24,8 @@ public class ClientReaction extends SpielClient{
 					} else{
 						Util.notification(""+won+" hat gewonnen!");
 					}
+				} else{
+					Util.notification("Die Zeit ist abgelaufen");
 				}
 			}
 		}

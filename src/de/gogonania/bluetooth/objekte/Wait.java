@@ -29,9 +29,8 @@ public class Wait extends Objekt{
 	public Wait(float x, float y, float size){
 		super(x, y, size, size, new Bild("wait.png"));
 	}
-
-	public void render(){
-		getBild().rotate(getWidth(), r);
-		super.render();
+	
+	public int getRotation() {
+		return r;
 	}
 }

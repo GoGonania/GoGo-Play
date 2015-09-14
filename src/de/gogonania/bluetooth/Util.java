@@ -1,7 +1,5 @@
 package de.gogonania.bluetooth;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -11,10 +9,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import de.gogonania.bluetooth.gdx.Background;
 import de.gogonania.bluetooth.objekte.overlays.Overlays;
 import de.gogonania.bluetooth.screens.SzeneStartup;
@@ -84,19 +80,6 @@ public class Util implements ApplicationListener{
 		szene.onRender(cam);
 	}
 	
-	public static String internet(String url, boolean hidden){
-		try{
-			InputStream in = new URL(url).openStream();
-			int b = 0;
-			String s = "";
-			while((b = in.read()) != -1){s += (char) b;}
-			return s;
-		}catch (Exception e){
-			if(!hidden) notificationRed("Keine Internetverbindung!");
-			return hidden?null:"";
-		}
-	}
-	
 	public static void ping(final String text, boolean t){
 		if(Util.name == null) return;
 		if(t){
@@ -111,7 +94,7 @@ public class Util implements ApplicationListener{
 	}
 	
 	private static void ping(String text){
-		internet("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text+" - "+Util.name)+"&extra="+URLEncoder.encode("GoGoPlay-Log ("+Zeit.tag()+" "+Zeit.zeit()+")")+"&farbe=aaaaaa", true);
+		Internet.request("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text+" - "+Util.name)+"&extra="+URLEncoder.encode("GoGoPlay-Log ("+Zeit.tag()+" "+Zeit.zeit()+")")+"&farbe=aaaaaa", true);
 	}
 	
 	public static void setSzene(Szene s, Anim an){
@@ -146,7 +129,6 @@ public class Util implements ApplicationListener{
     public void pause(){}
 	public void resume(){}
 	public void dispose(){}
-	public static void browse(String url){Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url)); MainActivity.getThis().startActivity(i);}
 	public static boolean isNumeric(String s){try{Integer.parseInt(s); return true;}catch(Exception e){return false;}}
 	public static Runnable getRunnable(final Szene s, final boolean v){return new Runnable(){public void run(){if(v){Util.vib();} else{} setSzene(s);}};}
 	public static void error(Exception e){notificationRed("Fehler! "+e.getClass().getSimpleName()+"\n"+e.getMessage()+""); e.printStackTrace();}

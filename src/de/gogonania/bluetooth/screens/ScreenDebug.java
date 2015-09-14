@@ -5,6 +5,9 @@ import de.gogonania.bluetooth.objekte.Text;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.Gdx;
 import de.gogonania.bluetooth.Util;
+import de.gogonania.bluetooth.gdx.Background;
+import de.gogonania.bluetooth.gdx.SensorInfo;
+
 import com.badlogic.gdx.graphics.Color;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.SliderListener;
@@ -51,6 +54,6 @@ public class ScreenDebug extends ScreenAktionenBase{
 	}
 	
 	public void update(){
-		debug.setText("FPS: "+Gdx.graphics.getFramesPerSecond()+"\nSpeicher: "+Util.makeNiceZahl(Gdx.app.getJavaHeap()/1000)+" - "+Util.makeNiceZahl(Gdx.app.getNativeHeap()/1000)+"");
+		debug.setText("FPS: "+Gdx.graphics.getFramesPerSecond()+"\nSpeicher: "+Util.makeNiceZahl(Gdx.app.getJavaHeap()/1000)+" - "+Util.makeNiceZahl(Gdx.app.getNativeHeap()/1000)+"\nNeigung: "+Math.round(SensorInfo.getRotation()*10)+"%\nObjekte: "+Background.getObjekte()+"");
 	}
 }

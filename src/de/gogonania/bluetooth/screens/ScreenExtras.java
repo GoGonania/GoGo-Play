@@ -1,13 +1,15 @@
 package de.gogonania.bluetooth.screens;
-import de.gogonania.bluetooth.sparts.ScreenAktionenBase;
+import java.io.File;
+
+import android.content.Intent;
+import android.net.Uri;
+import de.gogonania.bluetooth.Anim;
+import de.gogonania.bluetooth.Internet;
+import de.gogonania.bluetooth.MainActivity;
+import de.gogonania.bluetooth.Registry;
 import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
-import de.gogonania.bluetooth.Anim;
-import de.gogonania.bluetooth.Registry;
-import android.content.Intent;
-import de.gogonania.bluetooth.MainActivity;
-import android.net.Uri;
-import java.io.File;
+import de.gogonania.bluetooth.sparts.ScreenAktionenBase;
 
 public class ScreenExtras extends ScreenAktionenBase{
     public Szene getPreSzene(){
@@ -27,6 +29,12 @@ public class ScreenExtras extends ScreenAktionenBase{
 	}
 
 	public void open(){
+		add("Download-Link\nvon "+Util.getAppName()+"", new Runnable(){
+			public void run() {
+				Util.vib();
+				Internet.link(Registry.downloadlink);
+			}});
+		
 	     add(""+Util.getAppName()+"\nweiterschicken", new Runnable(){
 				public void run() {
 					try{
@@ -42,11 +50,11 @@ public class ScreenExtras extends ScreenAktionenBase{
 		add(Util.getAppName()+" auf\nGitHub ansehen", new Runnable(){
 				public void run(){
 					Util.vib();
-					Util.browse("https://github.com/GoGonania/GoGo-Play/");
+					Internet.link("https://github.com/GoGonania/GoGo-Play/");
 				}
 			});
 			
-		skip(2);
+		skip(1);
 			
 		add(new ScreenDebug());
 	}

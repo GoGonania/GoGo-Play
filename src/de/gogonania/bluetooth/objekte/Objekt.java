@@ -18,7 +18,7 @@ public class Objekt{
 	}
 
 	public void render(){
-		if(getBild() != null) getBild().render(getX(), getY(), getWidth(), getHeight(), getAlpha(), 0);
+		if(getBild() != null) getBild().render(getX(), getY(), getWidth(), getHeight(), getAlpha(), getRotation());
 	}
 
 	public boolean onClick(){
@@ -48,5 +48,6 @@ public class Objekt{
 	public boolean isHovered(boolean t){return t && (dialog || Szene.dialog == null) && !hide && activ && r.contains(Util.getX(), Util.getY());}
 	public float getAlpha(){return 1;}
 	public float getScale(){return 1;}
+	public int getRotation(){return 0;}
 	public void click(){}
 }

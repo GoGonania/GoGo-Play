@@ -23,10 +23,10 @@ public class ScreenGefundeneSpiele extends ScreenAktionenBase{
 	}
 
 	public int getItemsInARow() {
-		return 1;
+		return 2;
 	}
 	
 	public float getWidthHeight() {
-		return 0.1F;
+		return 0.3F;
 	}
 }

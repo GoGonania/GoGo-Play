@@ -13,6 +13,7 @@ public class Bilder{
 	public static Bild cyellow;
 	public static Bild cwhite;
 	public static Bild cdgray;
+	public static Bild corange;
 	
 	public static Bild cookie;
 	public static Bild cookiegold;
@@ -29,6 +30,7 @@ public class Bilder{
 		clgray = new Bild(Color.valueOf("aaaaaa"));
 		cdgray = new Bild(Color.DARK_GRAY);
 		cwhite = new Bild(Color.WHITE);
+		corange = new Bild(Color.valueOf("ffa500"));
 		
 		cookie = new Bild("cookie.png");
 		cookiegold = new Bild("cookie_gold.png");

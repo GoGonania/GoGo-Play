@@ -4,6 +4,7 @@ import de.gogonania.bluetooth.spielio.spiele.reaction.spiele.ReactionGameMath;
 import de.gogonania.bluetooth.spielio.spiele.reaction.spiele.ReactionGameNames;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.spielio.spiele.reaction.spiele.ReactionGameColor;
+import de.gogonania.bluetooth.spielio.spiele.reaction.spiele.ReactionGameFindColor;
 
 public class ReactionGames{
 	private static ArrayList<Class<? extends ReactionGame>> games = new ArrayList<Class<? extends ReactionGame>>();
@@ -12,6 +13,7 @@ public class ReactionGames{
 		games.add(ReactionGameMath.class);
 		games.add(ReactionGameColor.class);
 		games.add(ReactionGameNames.class);
+		games.add(ReactionGameFindColor.class);
 	}
 	
 	public static ReactionGame random(){

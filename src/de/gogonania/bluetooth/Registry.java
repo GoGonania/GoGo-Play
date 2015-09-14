@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 public class Registry{
 	public final static int clicktimeout = 250;
 	public final static float scrollspeed = 1.4F;
+	public final static String downloadlink = "http://gogonania.de/download/";
 	
 	public final static Anim[] animations = new Anim[]{
 		new Anim(){

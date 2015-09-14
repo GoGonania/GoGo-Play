@@ -31,7 +31,10 @@ public class Dialog extends TextObjekt{
 		for(Objekt o : objekte){
 			if(o.onClick()) return true;
 		}
-		cancel();
+		if(c){
+			cancel();
+			Util.vib();
+		}
 		return true;
 	}
 	
@@ -43,7 +46,7 @@ public class Dialog extends TextObjekt{
 		}
 	}
 	
-	public void cancel(){if(c){hide(); Util.vib();} else{}}
+	public void cancel(){if(c){hide();} else{}}
 	public void addObjekt(Objekt o){objekte.add(o); o.setDialog();}
 	public void hide(){Szene.dialog = null;}
 	public void show(){Szene.dialog = this;}

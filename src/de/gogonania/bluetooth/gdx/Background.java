@@ -16,21 +16,21 @@ import de.gogonania.bluetooth.util.Bilder;
 public class Background {
 	private static World world;
 	private static Array<Body> bodies = new Array<Body>();
-	private static final float d = 1600F/((float) Gdx.graphics.getHeight());
+	private static final float d = ((float) Gdx.graphics.getHeight())/1600F;
 	
 	public static void init(){
-		world = new World(new Vector2(0, -15*d*d), false);
+		world = new World(new Vector2(0, -15*d), false);
 		addWall(-1, 0, 1, Gdx.graphics.getHeight());
 		addWall(Gdx.graphics.getWidth()+2, 0, 1, Gdx.graphics.getHeight());
 		addWall(0, -1, Gdx.graphics.getWidth(), 1);
 	}
 	
 	public static void render(){
-		if(Util.chance(1)) add(Util.random(0, Gdx.graphics.getWidth()), Gdx.graphics.getHeight());
+		if(Util.chance(2) && Util.chance(60)) add(Util.random(0, Gdx.graphics.getWidth()), Gdx.graphics.getHeight());
 		Vector2 g = world.getGravity();
-		g.x = SensorInfo.getRotation()*6*d*d;
+		g.x = SensorInfo.getRotation()*6*d;
 		world.setGravity(g);
-		world.step(Gdx.graphics.getDeltaTime(), 50, 30);
+		try{world.step(Gdx.graphics.getDeltaTime(), (int)(18F*d), (int)(6F*d));}catch(Exception e){e.printStackTrace();}
 		world.getBodies(bodies);
 		for(Body b : bodies){
 			if(b.getUserData() != null){
@@ -44,6 +44,10 @@ public class Background {
 		for(Body b : bodies){
 			if(b.getUserData() != null) world.destroyBody(b);
 		}
+	}
+	
+	public static int getObjekte(){
+		return bodies.size;
 	}
 	
 	public static void add(float x, float y){
