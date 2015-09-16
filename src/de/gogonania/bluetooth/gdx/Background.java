@@ -26,7 +26,7 @@ public class Background {
 	}
 	
 	public static void render(){
-		if(Util.chance(2) && Util.chance(60)) add(Util.random(0, Gdx.graphics.getWidth()), Gdx.graphics.getHeight());
+		if(bodies.size < 100 && Util.chance(2) && Util.chance(60)) add(Util.random(0, Gdx.graphics.getWidth()), Gdx.graphics.getHeight());
 		Vector2 g = world.getGravity();
 		g.x = SensorInfo.getRotation()*6*d;
 		world.setGravity(g);
