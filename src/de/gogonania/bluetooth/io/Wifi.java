@@ -26,14 +26,14 @@ import de.gogonania.bluetooth.spielio.spiele.reaction.PacketReactionEnd;
 
 public class Wifi {
 	public static ArrayList<Game> games = new ArrayList<Game>();
-	private static final int tcpport = 8823+Util.getAppVersionCode();
+	private static final int tcpport = 8823;
 	private static final int udpport = tcpport+1;
 	private static Client c;
 	private static boolean discovering;
 	private static int f;
 	
 	public static void init(){
-		Log.set(Log.LEVEL_TRACE);
+		Log.set(Log.LEVEL_DEBUG);
 		c = new Client();
 		c.addListener(new Listener(){
 			public void received(Connection arg0, Object arg1){
