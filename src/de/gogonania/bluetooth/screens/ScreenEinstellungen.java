@@ -39,6 +39,13 @@ public class ScreenEinstellungen extends ScreenAktionenBase{
 			}
 		});
 		
+		add("Alle Daten\nlöschen", Bilder.cred, new Runnable(){
+			public void run(){
+				Util.vib();
+				Confirms.clearData();
+			}
+		});
+		
 		if(Spielsaves.hatSpielstände()){
 			add("Alle Spielstände\nlöschen", Bilder.cred, new Runnable(){
 					public void run(){
@@ -50,7 +57,7 @@ public class ScreenEinstellungen extends ScreenAktionenBase{
 			skip(1);
 		}
 		
-		skip(2);
+		skip(1);
 		
 		add("Animierter\nHintergrund", Util.b?Bilder.cgreen:Bilder.cred, new Runnable(){
 			public void run(){

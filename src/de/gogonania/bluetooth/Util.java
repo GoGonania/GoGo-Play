@@ -93,6 +93,12 @@ public class Util implements ApplicationListener{
 		}
 	}
 	
+	public static void kill(){
+		Util.ping("Kill", false);
+		MainActivity.close();
+		System.exit(0);
+	}
+	
 	private static void ping(String text){
 		Internet.request("http://www.gogonania.de/Java/ping.php?text="+URLEncoder.encode(text+" - "+Util.name)+"&extra="+URLEncoder.encode("GoGoPlay-Log ("+Zeit.tag()+" "+Zeit.zeit()+")")+"&farbe=aaaaaa", true);
 	}

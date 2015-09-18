@@ -1,18 +1,18 @@
 package de.gogonania.bluetooth.util;
-import de.gogonania.bluetooth.io.Wifi;
+import java.util.ArrayList;
+
+import de.gogonania.bluetooth.Spielstand;
 import de.gogonania.bluetooth.Util;
-import de.gogonania.bluetooth.screens.ScreenMain;
-import de.gogonania.bluetooth.spielio.save.Spielsave;
 import de.gogonania.bluetooth.io.GameUtil;
 import de.gogonania.bluetooth.io.IPerson;
-import de.gogonania.bluetooth.packete.PacketKick;
-import java.util.ArrayList;
-import de.gogonania.bluetooth.packete.PacketMessage;
 import de.gogonania.bluetooth.io.Person;
-import de.gogonania.bluetooth.spielio.save.Spielsaves;
+import de.gogonania.bluetooth.io.Wifi;
+import de.gogonania.bluetooth.packete.PacketKick;
+import de.gogonania.bluetooth.packete.PacketMessage;
+import de.gogonania.bluetooth.screens.ScreenMain;
 import de.gogonania.bluetooth.screens.ScreenSpielstände;
-import de.gogonania.bluetooth.Spielstand;
-import de.gogonania.bluetooth.MainActivity;
+import de.gogonania.bluetooth.spielio.save.Spielsave;
+import de.gogonania.bluetooth.spielio.save.Spielsaves;
 
 public class Confirms{
 	public static void closeGameClient(){
@@ -23,16 +23,30 @@ public class Confirms{
 			}
 		});
 	}
+	
+	public static void clearData(){
+		c("alle Daten löschen", new Runnable(){
+			public void run() {
+				Fenster.progress(
+					new Runnable(){
+					    public void run() {
+					    	Spielstand.clear();
+					    }}, 
+					new Runnable(){
+						public void run() {
+							Util.kill();
+						}}, 
+					"Daten werden gelöscht");
+			}});
+	}
 
 	public static void kill(){
 		c(Util.getAppName()+" beenden", new Runnable(){
 			public void run(){
 				Fenster.progress(new Runnable(){
 					public void run(){
-						Util.ping("Kill", false);
 						Spielstand.save();
-						MainActivity.close();
-						System.exit(0);
+						Util.kill();
 					}
 				}, null, "Spiel wird gespeichert...");
 			}

@@ -70,7 +70,6 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker>{
 	
 	public void update(){
 		if(!GameUtil.hatSpiel()) return;
-		cookie.click();
 		p.setHide(getClient().a.gold || getClient().a.progress == 0);
 		cookie.setBackground(getClient().a.gold?Bilder.cookiegold:Bilder.cookie);
 		p.setProgress(getClient().a.progress);

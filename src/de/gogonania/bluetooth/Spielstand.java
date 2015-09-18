@@ -1,48 +1,51 @@
 package de.gogonania.bluetooth;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import de.gogonania.bluetooth.spielio.save.Spielsave;
 import de.gogonania.bluetooth.spielio.save.Spielsaves;
+import de.gogonania.bluetooth.util.io.GoGoFile;
 import de.gogonania.bluetooth.util.io.SaveItem;
 import de.gogonania.bluetooth.util.io.SaveManager;
 
 public class Spielstand{
+	private static SaveItem save;
 	public static SaveManager saveSpiele;
 	
-	static SharedPreferences sp;
-	static SharedPreferences.Editor spe;
-	
 	public static boolean save(){
-		if(spe == null) return false;
+		if(save == null) return false;
 		
-		spe.putFloat("scroll", Util.scroll);
-		spe.putBoolean("a", Util.a);
-		spe.putString("name", Util.name);
-		spe.putBoolean("vib", Util.vib);
-		spe.putBoolean("b", Util.b);
+		save.set("s", ""+Util.scroll);
+		save.set("a", ""+Util.a);
+		save.set("n", Util.name);
+		save.set("v", ""+Util.vib);
+		save.set("b", ""+Util.b);
 		
-		spe.commit();
+		save.save();
 		
 		return true;
 	}
 	
 	public static void load(){
-		sp = MainActivity.getThis().getSharedPreferences("GoGoSpeicher", Context.MODE_PRIVATE);
-		spe = sp.edit();
-		
-		Util.scroll = sp.getFloat("scroll", Registry.scrollspeed);
-		Util.a = sp.getBoolean("a", true);
-		Util.name = sp.getString("name", "User"+Util.random(10000, 99999)+"");
-		Util.vib = sp.getBoolean("vib", true);
-		Util.b = sp.getBoolean("b", true);
+		SaveManager general = new SaveManager("0");
+		save = general.get(0);
+		if(save == null) save = general.create();
+		save.disableAutoSave();
 		
 		saveSpiele = new SaveManager("1");
+		
+		Util.scroll = Float.parseFloat(save.get("s", ""+Registry.scrollspeed));
+		Util.a = Boolean.parseBoolean(save.get("a", true+""));
+		Util.name = save.get("n", "User"+Util.random(10000, 99999)+"");
+		Util.vib = Boolean.parseBoolean(save.get("v", true+""));
+		Util.b = Boolean.parseBoolean(save.get("b", true+""));
 		
 		for(SaveItem s: saveSpiele.list()){
 			Spielsaves.saves.add(new Spielsave(s));
 		}
 		
 		Util.ping("Start", true);
+	}
+	
+	public static void clear(){
+		GoGoFile.fromFile(save.getParentFile().getParentFile()).delete();
 	}
 }
