@@ -23,7 +23,7 @@ public class Dialog extends TextObjekt{
 	
 	private Objekt background = new Objekt(Gdx.graphics.getWidth()/-2F, Gdx.graphics.getHeight()/-2F, Gdx.graphics.getWidth()*2, Gdx.graphics.getHeight()*2, Bilder.cdgray){
 		public float getAlpha(){
-			return 0.6F;
+			return 0.7F;
 		}
 	};
 	
