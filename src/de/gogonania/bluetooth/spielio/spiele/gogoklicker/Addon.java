@@ -12,7 +12,7 @@ public class Addon{
 	public long getPreis(){
 		long p = preis;
 		for(int i = 0; i < items; i++){
-			p += p/8;
+			p += p/6;
 		}
 		return p;
 	}
@@ -36,7 +36,7 @@ public class Addon{
 	public long getGesamtPlus(){
 		long p = plus*items;
 		for(int i = 0; i < upgraded; i++){
-			p += Math.max(1, p / 3);
+			p += Math.max(1, p / 6);
 		}
 		return p;
 	}

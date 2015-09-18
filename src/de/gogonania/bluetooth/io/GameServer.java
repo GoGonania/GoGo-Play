@@ -199,7 +199,7 @@ public class GameServer {
 			o[i] = Spielsaves.saves.get(i).getDetail();
 		}
 		o[o.length-1] = "Neuen Spielstand anlegen...";
-		Fenster.select("Wo willst du das Spiel speichern?", o, new SelectListener(){
+		Fenster.select("Wo willst du das Spiel speichern?", o, 2, new SelectListener(){
 				public void selected(int id){
 					if(id < Spielsaves.saves.size()){
 						Confirms.saveGame(Spielsaves.saves.get(id));

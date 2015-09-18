@@ -12,12 +12,12 @@ import de.gogonania.bluetooth.util.Grid;
 public abstract class DialogSelect extends Dialog {
 	public abstract void selected(int id);
 
-	public DialogSelect(String text, Object[] options) {
+	public DialogSelect(String text, Object[] options, int inarow) {
 		super(text, true);
 		if(options.length == 0){
 			setText("Es gibt hier nichts zum Auswählen");
 		} else{
-			Grid g = new Grid(3, 0.1F, 0.45F){
+			Grid g = new Grid(inarow, 0.1F, 0.45F/3F*((float)inarow)){
 				public float getHeightMargin(){
 					return Gdx.graphics.getHeight()-(getDY()+getDHeight()*0.88F);
 				}

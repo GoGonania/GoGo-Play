@@ -101,12 +101,13 @@ public class Fenster{
 		});
 	}
 	
-	public static void select(String titel, Object[] options, final SelectListener s){
+	public static void select(String t, Object[] os, SelectListener s){select(t, os, 3, s);}
+	public static void select(String titel, Object[] options, int inarow, final SelectListener s){
 		if(options.length == 1){
 			s.selected(0);
 			return;
 		}
-		new DialogSelect(titel, options) {
+		new DialogSelect(titel, options, inarow) {
 			public void selected(int id) {
 				s.selected(id);
 			}

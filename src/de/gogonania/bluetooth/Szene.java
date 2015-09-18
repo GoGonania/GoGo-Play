@@ -64,7 +64,7 @@ public class Szene{
 	
 	public void onRender(OrthographicCamera cam){
 		batch.setProjectionMatrix(cam.combined);
-		batch.begin();
+		try{batch.begin();}catch(Exception e){e.printStackTrace(); return;}
 		Vector3 v = cam.unproject(new Vector3(0, Gdx.graphics.getHeight(), 0));
 		
 		if(isClosed()) onOpen();
