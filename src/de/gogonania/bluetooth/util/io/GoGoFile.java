@@ -5,12 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import android.os.Environment;
 import de.gogonania.bluetooth.MainActivity;
 import de.gogonania.bluetooth.Util;
 
 public class GoGoFile extends File{
 	public GoGoFile(String path){
-		super(MainActivity.getThis().getFilesDir()+"/"+path);
+		super(Environment.getExternalStorageDirectory()+"/"+Util.getAppName()+"/"+path);
 	}
 	
 	public void write(String s){

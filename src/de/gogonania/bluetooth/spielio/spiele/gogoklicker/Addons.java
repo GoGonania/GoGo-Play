@@ -49,7 +49,7 @@ public class Addons{
 	}
 	
 	public long getUpgradePreis(){
-		long p = 500;
+		long p = 400;
 		for(int i = 1; i < perclick; i++){
 			p *= 2;
 		}

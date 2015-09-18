@@ -26,9 +26,9 @@ public class Addon{
 	}
 	
 	public long getUpgradePreis(){
-		long p = preis*4;
+		long p = preis*5;
 		for(int i = 0; i < upgraded; i++){
-			p += p/8;
+			p += p/2;
 		}
 		return p;
 	}

@@ -21,7 +21,7 @@ public class Warteschlange {
 						continue;
 					}
 					Item i = items.get(0);
-					if(i == null) continue;
+					if(i == null || !GameUtil.hatSpiel()) continue;
 					i.p.send(i.o);
 					items.remove(0);
 				}

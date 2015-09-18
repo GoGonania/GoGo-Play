@@ -17,7 +17,7 @@ public abstract class DialogSelect extends Dialog {
 		if(options.length == 0){
 			setText("Es gibt hier nichts zum Auswählen");
 		} else{
-			Grid g = new Grid(3, 0.1F, 0.5F){
+			Grid g = new Grid(3, 0.1F, 0.45F){
 				public float getHeightMargin(){
 					return Gdx.graphics.getHeight()-(getDY()+getDHeight()*0.88F);
 				}
