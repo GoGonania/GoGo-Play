@@ -17,4 +17,5 @@ GoGo-Play ist eine kleine Spielesammlung für Android, bei der man alleine oder 
 <li>LibGDX Box2D</li>
 <li>Kryo</li>
 <li>Kryonet</li>
+<li>Slick2D Pathfinding</li>
 </ul>

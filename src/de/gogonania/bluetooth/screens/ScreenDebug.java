@@ -1,5 +1,7 @@
 package de.gogonania.bluetooth.screens;
 import de.gogonania.bluetooth.sparts.ScreenAktionenBase;
+import de.gogonania.bluetooth.test.ScreenTest;
+import de.gogonania.bluetooth.test.ScreenTest2;
 import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.objekte.Text;
 import com.badlogic.gdx.utils.Align;
@@ -51,6 +53,9 @@ public class ScreenDebug extends ScreenAktionenBase{
 					}, 0, 300, Util.rt);
 			}
 		});
+		
+		add("Pathfinding-Test", Util.getRunnable(new ScreenTest(), true));
+		add("Test2", Util.getRunnable(new ScreenTest2(), true));
 	}
 	
 	public void update(){

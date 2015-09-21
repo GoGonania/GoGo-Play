@@ -113,7 +113,7 @@ public class GameServer {
 		info.onPacket(pp.player);
 		sendAll(pp);
 		sendMessage(p.getName()+" hat das Spiel verlassen", "r");
-		if(!shutdown && !GameUtil.game.getSpiel().getInfo().darfSpielStarten()) close("Die Mindestanzahl an Spielern wurde nicht eingehalten");
+		if(!shutdown && !GameUtil.game.getSpiel().getInfo().darfSpielStarten() && !lobby) close("Die Mindestanzahl an Spielern wurde nicht eingehalten");
 	}
 	
 	public void add(IPerson p){

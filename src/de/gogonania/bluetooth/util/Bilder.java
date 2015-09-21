@@ -18,6 +18,10 @@ public class Bilder{
 	public static Bild cookie;
 	public static Bild cookiegold;
 	
+	public static Bild panzer;
+	public static Bild tilegras;
+	public static Bild tilewasser;
+	
 	public static void init(){
 		background = new Bild("background.jpg");
 		logo = new Bild("logo.png");
@@ -34,5 +38,13 @@ public class Bilder{
 		
 		cookie = new Bild("cookie.png");
 		cookiegold = new Bild("cookie_gold.png");
+		
+		panzer = new Bild("tank.png");
+		tilegras = tile("gras");
+		tilewasser = normal;
+	}
+	
+	private static Bild tile(String name){
+		return new Bild("tiles/"+name+".png");
 	}
 }
