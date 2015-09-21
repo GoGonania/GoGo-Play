@@ -22,7 +22,7 @@ public class ScreenTest2 extends Szene{
 	}
 	
 	public void open(){
-		welt = new Welt(30, 20, false){
+		welt = new Welt(30, 32, false){
 			public Bild getBild(int id) {
 				switch(id){
 				case 0:
@@ -60,7 +60,7 @@ public class ScreenTest2 extends Szene{
 		
 		if(p != null){
 			if(step == -1 || step < p.getLength()-1){
-				if(lilstep < 4){
+				if(lilstep != 2){
 					lilstep++;
 				} else{
 					lilstep = 0;
@@ -76,7 +76,6 @@ public class ScreenTest2 extends Szene{
 			int y = (step==-1)?0:p.getStep(step).getY();
 			Path n = welt.findPath(new Mover(){}, x, y, welt.getClickedX(), welt.getClickedY());
 			if(n != null){
-				Util.vib();
 				p = n;
 				step = 0;
 			}
