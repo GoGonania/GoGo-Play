@@ -41,7 +41,7 @@ public class Bilder{
 		
 		panzer = new Bild("tank.png");
 		tilegras = tile("gras");
-		tilewasser = normal;
+		tilewasser = tile("wasser");
 	}
 	
 	private static Bild tile(String name){
