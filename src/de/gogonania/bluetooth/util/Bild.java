@@ -7,7 +7,6 @@ import de.gogonania.bluetooth.Szene;
 
 public class Bild{
 	private Sprite s;
-	private Color c;
 	
 	public Bild(Texture t){
 		s = new Sprite(t);
@@ -19,7 +18,6 @@ public class Bild{
 	
 	public Bild(Color c){
 	    this("button.png");
-		this.c = c;
 		s.setColor(c);
 	}
 	
@@ -33,7 +31,4 @@ public class Bild{
 	public void render(float x, float y, float width, float height){
 		render(x, y, width, height, 1, 0);
 	}
-	
-	public Color getColor(){return c;}
-	public boolean hatColor(){return c != null;}
 }

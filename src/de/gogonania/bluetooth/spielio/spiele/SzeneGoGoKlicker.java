@@ -73,7 +73,7 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker>{
 		p.setHide(getClient().a.gold || getClient().a.progress == 0);
 		cookie.setBackground(getClient().a.gold?Bilder.cookiegold:Bilder.cookie);
 		p.setProgress(getClient().a.progress);
-		Color c = getClient().a.gold?Bilder.cyellow.getColor():Color.WHITE;
+		Color c = getClient().a.gold?Color.YELLOW:Color.WHITE;
 		geld.setTextColor(c);
 		info.setTextColor(c);
 		geld.setText(Util.makeNiceGeld(getClient().geld));
