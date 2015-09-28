@@ -26,7 +26,7 @@ public class ServerGoGoKlicker extends SpielServer implements Saveable{
 				if(progress == pmax){
 					progress = 0;
 					as.gold = true;
-					pmax *= 1.3F;
+					pmax *= 1.2F;
 					sendGold();
 				}
 			}
@@ -52,7 +52,7 @@ public class ServerGoGoKlicker extends SpielServer implements Saveable{
 	public void startThread(){
 		while(isRunning()){
 			long p = as.getPlus();
-			if(as.gold && Util.chance(8)){
+			if(as.gold && Util.chance(7)){
 				as.gold = false;
 				sendGold();
 			}
