@@ -52,7 +52,7 @@ public class ServerGoGoKlicker extends SpielServer implements Saveable{
 	public void startThread(){
 		while(isRunning()){
 			long p = as.getPlus();
-			if(as.gold && Util.chance(7) && Util.chance(50)){
+			if(as.gold && Util.chance(8)){
 				as.gold = false;
 				sendGold();
 			}

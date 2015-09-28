@@ -54,7 +54,7 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker> implements An
 	
 	public void open(){
 		final float cookiesize = Gdx.graphics.getWidth()/4F;
-		cookie = new Image(cookiesize/10F, Gdx.graphics.getHeight()-cookiesize-cookiesize/8F, cookiesize, cookiesize, Bilder.cookie){
+		cookie = new Image(cookiesize/9F, Gdx.graphics.getHeight()-cookiesize-cookiesize/8F, cookiesize, cookiesize, Bilder.cookie){
 			public void click(){
 				Util.vib();
 				Background.add();
