@@ -8,16 +8,17 @@ import com.badlogic.gdx.utils.Align;
 
 import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
-import de.gogonania.bluetooth.gdx.Background;
+import de.gogonania.bluetooth.gdx.AnimatedBackground;
 import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.objekte.Logo;
 import de.gogonania.bluetooth.objekte.TextObjekt;
+import de.gogonania.bluetooth.util.Bild;
 import de.gogonania.bluetooth.util.Bilder;
+import de.gogonania.bluetooth.util.Confirms;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.SelectListener;
-import de.gogonania.bluetooth.util.Confirms;
 
-public abstract class ScreenBase extends Szene{
+public abstract class ScreenBase extends Szene implements AnimatedBackground{
 	public abstract Szene getPreSzene();
 	public abstract String getTitle();
 	
@@ -27,6 +28,26 @@ public abstract class ScreenBase extends Szene{
 	
 	public static final float getBarHeight(){return Gdx.graphics.getHeight()/11F;}
 	private static final float getBarItemsMargin(){return getBarHeight()/12F;}
+	
+	public float getSize() {
+		return Util.chance(15)?(Util.chance(15)?4:2):1;
+	}
+	
+	public Bild getBild() {
+		return Bilder.logo;
+	}
+	
+	public boolean ground() {
+		return true;
+	}
+	
+	public boolean rect() {
+		return true;
+	}
+	
+	public boolean chance(){
+		return Util.chance(2) && Util.chance(60);
+	}
 
 	public ScreenBase() {
 		super(Bilder.background);
@@ -52,11 +73,6 @@ public abstract class ScreenBase extends Szene{
 		setObjekte(action, logo, bar);
 		super.onOpen();
 		onUpdate();
-	}
-	
-	public void renderObjekts(){
-		if(Util.b && !Util.isSwitching()) Background.render();
-		super.renderObjekts();
 	}
 	
 	public void onBack(){

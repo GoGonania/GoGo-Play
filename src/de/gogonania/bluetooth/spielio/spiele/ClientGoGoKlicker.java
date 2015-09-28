@@ -6,6 +6,7 @@ import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketAddon;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketUpgrade;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketGold;
 import de.gogonania.bluetooth.Util;
+import de.gogonania.bluetooth.gdx.Background;
 
 public class ClientGoGoKlicker extends SpielClient{
 	public long geld;
@@ -24,6 +25,7 @@ public class ClientGoGoKlicker extends SpielClient{
 				} else{
 					if(o instanceof PacketGold){
 						a.gold = !a.gold;
+						if(a.gold) Background.reset();
 						Util.vibBig();
 					}
 				}

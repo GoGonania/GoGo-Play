@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector3;
 
+import de.gogonania.bluetooth.gdx.AnimatedBackground;
+import de.gogonania.bluetooth.gdx.Background;
 import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.objekte.Objekt;
 import de.gogonania.bluetooth.objekte.dialoge.Dialog;
@@ -72,6 +74,8 @@ public class Szene{
 		background.render(0, v.y, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		if(isClosed()) onOpen();
+		
+		if(this instanceof AnimatedBackground && Util.b && !Util.isSwitching()) Background.render();
 		
 		renderObjekts();
 		render();

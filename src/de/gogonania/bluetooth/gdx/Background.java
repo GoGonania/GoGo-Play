@@ -5,50 +5,51 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 import de.gogonania.bluetooth.Util;
-import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Bild;
 
 public class Background {
-	class Item{
+	public static class Item{
 		Bild b;
 		float size;
 	}
 	
-	private static World world;
 	private static boolean r;
 	private static Array<Body> bodies = new Array<Body>();
 	private static final float d = ((float) Gdx.graphics.getHeight())/1600F;
-	
-	public static void init(){
-		world = new World(new Vector2(0, -15*d), false);
-		addWall(-1, 0, 1, Gdx.graphics.getHeight());
-		addWall(Gdx.graphics.getWidth()+2, 0, 1, Gdx.graphics.getHeight());
-		addWall(0, -1, Gdx.graphics.getWidth(), 1);
-	}
+	private static World world = new World(new Vector2(0, -16*d), false);
 	
 	public static void render(){
 		if(r){
 			for(Body b : bodies){
-				if(b.getUserData() != null) world.destroyBody(b);
+				world.destroyBody(b);
 			}
+			bodies.clear();
 			r = false;
-		}
-		if(Util.chance(2) && Util.chance(60)) add(Util.random(0, Gdx.graphics.getWidth()), Gdx.graphics.getHeight());
-		Vector2 g = world.getGravity();
-		g.x = SensorInfo.getRotation()*6*d;
-		world.setGravity(g);
-		world.step(Gdx.graphics.getDeltaTime(), (int)(18F*d), (int)(6F*d));
-		world.getBodies(bodies);
-		for(Body b : bodies){
-			if(b.getUserData() != null){
-				float size = (float) b.getUserData();
-				Bilder.logo.render(b.getPosition().x-size/2F, b.getPosition().y-size/2F, size, size, 1, (int)(MathUtils.radiansToDegrees * b.getAngle()));
+		} else{
+			if(bodies.size == 0){
+				addWall(-1, 0, 1, Gdx.graphics.getHeight());
+				addWall(Gdx.graphics.getWidth()+2, 0, 1, Gdx.graphics.getHeight());
+				if(get().ground()) addWall(0, -1, Gdx.graphics.getWidth(), 1);
+			}
+			if(get().chance()) add();
+			Vector2 g = world.getGravity();
+			g.x = SensorInfo.getRotation()*6*d;
+			world.setGravity(g);
+			world.step(Gdx.graphics.getDeltaTime(), (int)(18F*d), (int)(6F*d));
+			world.getBodies(bodies);
+			for(Body b : bodies){
+				if(b.getUserData() != null){
+					Item i = (Item) b.getUserData();
+					i.b.render(b.getPosition().x-i.size/2F, b.getPosition().y-i.size/2F, i.size, i.size, 1, (int)(MathUtils.radiansToDegrees * b.getAngle()));
+				}
 			}
 		}
 	}
@@ -61,22 +62,31 @@ public class Background {
 		return bodies.size;
 	}
 	
-	public static void add(float x, float y){
-		float s = ((AnimatedBackground)Util.getSzene()).getSize();
+	public static void add(){
+		float s = get().getSize();
 		float size = Gdx.graphics.getWidth()/50F*s;
+		Item i = new Item();
+		i.size = size;
+		i.b = get().getBild();
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
-		bodyDef.position.set(x, y);
+		bodyDef.position.set(Util.random(0, Gdx.graphics.getWidth()), Gdx.graphics.getHeight()+size);
 		Body body = world.createBody(bodyDef);
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(size/2F, size/2F);
+		Shape shape = null;
+		if(get().rect()){
+			shape = new PolygonShape();
+		    ((PolygonShape)shape).setAsBox(size/2F, size/2F);
+		} else{
+			shape = new CircleShape();
+			shape.setRadius(size/2F);
+		}
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.restitution = 0.4F - (s * 1F);
 		fixtureDef.density = 30*s;
 		fixtureDef.friction = 0;
 	    body.createFixture(fixtureDef);
-	    body.setUserData(size);
+	    body.setUserData(i);
 		shape.dispose();
 	}
 	
@@ -92,4 +102,6 @@ public class Background {
 	    body.createFixture(fixtureDef);
 		shape.dispose();
 	}
+	
+	private static AnimatedBackground get(){return (AnimatedBackground) Util.getSzene();}
 }

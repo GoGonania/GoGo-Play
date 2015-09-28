@@ -2,7 +2,6 @@ package de.gogonania.bluetooth.screens;
 
 import de.gogonania.bluetooth.Spielstand;
 import de.gogonania.bluetooth.Util;
-import de.gogonania.bluetooth.gdx.Background;
 import de.gogonania.bluetooth.objekte.overlays.Overlays;
 import de.gogonania.bluetooth.sparts.SzeneLoading;
 import de.gogonania.bluetooth.spielio.Spielhalle;
@@ -17,7 +16,6 @@ public class SzeneStartup extends SzeneLoading {
 		Overlays.init();
 		Spielhalle.init();
 		ReactionGames.init();
-		Background.init();
 	}
 	
 	public void update(){

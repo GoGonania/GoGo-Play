@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 import de.gogonania.bluetooth.Util;
+import de.gogonania.bluetooth.gdx.AnimatedBackground;
+import de.gogonania.bluetooth.gdx.Background;
 import de.gogonania.bluetooth.io.GameUtil;
 import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.objekte.Image;
@@ -13,17 +15,38 @@ import de.gogonania.bluetooth.spielio.GameSzene;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.Group;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketCookieClick;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketUpgrade;
+import de.gogonania.bluetooth.util.Bild;
 import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Grid;
 import de.gogonania.bluetooth.objekte.Progress;
 
-public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker>{
+public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker> implements AnimatedBackground{
 	private Image cookie;
 	private Text geld;
 	private Text info;
 	private Button upgrade;
 	private Progress p;
 	private ArrayList<Group> groups = new ArrayList<Group>();
+	
+	public float getSize() {
+		return Util.chance(15)?(Util.chance(15)?4:2):1;
+	}
+	
+	public Bild getBild() {
+		return getClient().a.gold?Bilder.cookiegold:Bilder.cookie;
+	}
+	
+	public boolean ground() {
+		return false;
+	}
+	
+	public boolean rect() {
+		return false;
+	}
+	
+	public boolean chance(){
+		return false;
+	}
 	
 	public SzeneGoGoKlicker(){
 		super(Bilder.background);
@@ -34,6 +57,7 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker>{
 		cookie = new Image(cookiesize/10F, Gdx.graphics.getHeight()-cookiesize-cookiesize/8F, cookiesize, cookiesize, Bilder.cookie){
 			public void click(){
 				Util.vib();
+				Background.add();
 				getClient().send(new PacketCookieClick());
 			}
 			public float getScale(){
