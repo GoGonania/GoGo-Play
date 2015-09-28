@@ -2,11 +2,11 @@ package de.gogonania.bluetooth.io;
 import java.util.ArrayList;
 
 import de.gogonania.bluetooth.packete.PacketChanged;
-import de.gogonania.bluetooth.util.Info;
+import de.gogonania.bluetooth.util.GoGoMap;
 
 public class GameInfo{
 	private String[] last;
-	private Info<String, PlayerInfo> players = new Info<String, PlayerInfo>();
+	private GoGoMap<String, PlayerInfo> players = new GoGoMap<String, PlayerInfo>();
 	
 	public void onPacket(String[] names){
 		if(last != null){

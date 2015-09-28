@@ -1,9 +1,9 @@
 package de.gogonania.bluetooth.io;
 import de.gogonania.bluetooth.packete.PacketChanged;
-import de.gogonania.bluetooth.util.Info;
+import de.gogonania.bluetooth.util.GoGoMap;
 
 public class PlayerInfo{
-	private Info<String, String> infos = new Info<String, String>();
+	private GoGoMap<String, String> infos = new GoGoMap<String, String>();
 	private String name;
 	
 	public PlayerInfo(String n){
@@ -15,6 +15,6 @@ public class PlayerInfo{
 	public void addPoints(int points){setPoints(getPoints()+points);}
 	public boolean isBereit(){return infos.getBoolean("ready", false);}
 	public String getName(){return name;}
-	public Info<String, String> getInfo(){return infos;}
+	public GoGoMap<String, String> getInfo(){return infos;}
 	public boolean isPaused(){return infos.getBoolean("paused", false);}
 }

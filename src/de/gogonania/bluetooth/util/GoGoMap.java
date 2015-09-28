@@ -1,7 +1,7 @@
 package de.gogonania.bluetooth.util;
 import java.util.ArrayList;
 
-public class Info<K extends Object, V extends Object>{
+public class GoGoMap<K, V>{
 	private ArrayList<K> keys = new ArrayList<K>();
 	private ArrayList<V> values = new ArrayList<V>();
 	
@@ -48,4 +48,5 @@ public class Info<K extends Object, V extends Object>{
 	public ArrayList<K> getKeys(){return keys;}
     public int size(){return keys.size();}
 	public V get(K key){return get(key, null);}
+	public boolean exists(K key){return pos(key) != -1;}
 }
