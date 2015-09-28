@@ -22,6 +22,7 @@ public abstract class ReactionGame{
 	
 	private void richtig(){
 		wrong = true;
+		if(GameUtil.isOwner() && GameUtil.game.server.personen.size() > 1) Util.sleep(30);
 		GameUtil.game.send(new PacketReactionRight());
 	}
 	

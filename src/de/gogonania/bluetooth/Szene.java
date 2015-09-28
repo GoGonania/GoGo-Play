@@ -16,6 +16,7 @@ import de.gogonania.bluetooth.objekte.dialoge.Dialog;
 import de.gogonania.bluetooth.objekte.overlays.Overlays;
 import de.gogonania.bluetooth.util.Bild;
 import de.gogonania.bluetooth.util.Bilder;
+import com.badlogic.gdx.graphics.g3d.particles.emitters.RegularEmitter;
 
 public class Szene{
 	private boolean open;
@@ -130,7 +131,7 @@ public class Szene{
 		generator.scaleForPixelHeight(s);
 		parameter.minFilter = Texture.TextureFilter.Nearest;
 		parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
-		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZöäüÖÄÜ,.!?()/-ß1234567890=+:\"'*_|<>%&€";
+		parameter.characters = Registry.zeichen;
 		return generator.generateFont(parameter);
 	}
 }

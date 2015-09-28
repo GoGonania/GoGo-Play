@@ -8,6 +8,7 @@ import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.Listener;
+import de.gogonania.bluetooth.Registry;
 
 public class Input extends TextObjekt{
 	private String label;
@@ -25,7 +26,7 @@ public class Input extends TextObjekt{
 		Fenster.prompt("Bitte hier eingeben:", label + " "+getVerb()+"", getText(), new Listener(){
 				public void ready(String s){
 					if(s != null){
-						s = s.trim();
+						s = Registry.remove(s);
 						if(!empty && s.isEmpty()){
 							Util.notificationRed(""+label+" darf nicht leer sein");
 						} else{

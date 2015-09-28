@@ -12,8 +12,14 @@ import com.badlogic.gdx.utils.Array;
 
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.util.Bilder;
+import de.gogonania.bluetooth.util.Bild;
 
 public class Background {
+	class Item{
+		Bild b;
+		float size;
+	}
+	
 	private static World world;
 	private static boolean r;
 	private static Array<Body> bodies = new Array<Body>();
@@ -56,8 +62,7 @@ public class Background {
 	}
 	
 	public static void add(float x, float y){
-		float s = 1;
-		if(Util.chance(15)) s = Util.chance(15)?4:2;
+		float s = ((AnimatedBackground)Util.getSzene()).getSize();
 		float size = Gdx.graphics.getWidth()/50F*s;
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;

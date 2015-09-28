@@ -51,7 +51,7 @@ public class Addons{
 	public long getUpgradePreis(){
 		long p = 400;
 		for(int i = 1; i < perclick; i++){
-			p *= 2;
+			p *= 1.3F;
 		}
 		return p;
 	}

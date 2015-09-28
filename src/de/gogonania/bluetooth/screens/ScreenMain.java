@@ -14,6 +14,7 @@ import de.gogonania.bluetooth.util.Fenster;
 import de.gogonania.bluetooth.util.Grid;
 import de.gogonania.bluetooth.util.Listener;
 import de.gogonania.bluetooth.spielio.save.Spielsaves;
+import de.gogonania.bluetooth.Registry;
 
 public class ScreenMain extends ScreenBase{
 	private Grid g = new Grid(1, 0.5F, 0.2F);
@@ -33,7 +34,7 @@ public class ScreenMain extends ScreenBase{
 				Fenster.prompt("Wie willst du denn heißen?", "Name ändern", Util.name, new Listener(){
 					public void ready(String s){
 						if(s != null){
-							s = s.trim();
+							s = Registry.remove(s);
 							if(!s.isEmpty()){
 								Util.name = s;
 								Util.refreshScreen();
