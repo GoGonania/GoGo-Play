@@ -114,7 +114,6 @@ public class Confirms{
 	}
 	
 	public static void removeSpielstand(){
-		if(!Spielsaves.hatSpielstände())
 		c("alle Spielstände löschen", new Runnable(){
 			public void run(){
 				while(Spielsaves.hatSpielstände()){

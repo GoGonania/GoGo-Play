@@ -18,10 +18,13 @@ public class ScreenModeErstellen extends ScreenBase {
 	
 	public void open(){
 		if(Spielsaves.hatSpielstände()) setAction("Spiel laden", new ScreenSpielstände());
-		
+		final Szene s = this;
 		final Formular f = new Formular(){
 			public float getHeightMargin(){
 				return Gdx.graphics.getHeight()/3F;
+			}
+			public Szene getSzene(){
+				return s;
 			}
 		};
 		

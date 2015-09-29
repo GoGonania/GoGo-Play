@@ -17,9 +17,11 @@ public class Group{
 	private Text info;
 	private Addon addon;
 	private int id;
+	private Szene szene;
 	
-	public Group(Grid g, Addon a, int i){
+	public Group(Szene s, Grid g, Addon a, int i){
 		addon = a;
+		szene = s;
 		id = i;
 		
 		final Rectangle r1 = g.getRectangle();
@@ -55,7 +57,7 @@ public class Group{
 			}
 		};
 		
-		Util.getSzene().setObjekte(info, kaufen, upgrade, info2);
+		szene.setObjekte(info, kaufen, upgrade, info2);
 	}
 	
 	public void update(){

@@ -8,18 +8,25 @@ public class Registry{
 	public final static String downloadlink = "gogonania.de/download";
 	public final static String zeichen = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZöäüÖÄÜ,.!?()/-ß1234567890=+:\"'*_|<>%&€";
 	
-	public final static Anim[] animations = new Anim[]{
-		new Anim(){
-			public int frames(){return 7;}
-			public void up(OrthographicCamera cam){cam.zoom -= 0.05F;}
-			public void down(OrthographicCamera cam){cam.zoom += 0.05F;}
-		},
-	    new Anim(){
-	        public int frames(){return 18;}
-	        public void up(OrthographicCamera cam){cam.position.y += Gdx.graphics.getHeight()/frames();}
-	        public void down(OrthographicCamera cam){cam.position.y -= Gdx.graphics.getHeight()/frames();}
-	    }
-	};
+	public final static Anim[] animations;
+	
+	static{
+		animations = new Anim[]{
+			new Anim(){
+				public int frames(){return 8;}
+				public void anim(OrthographicCamera cam, int step){
+					cam.zoom += 0.06*(float)step;
+					cam.position.add((float)Gdx.graphics.getWidth()/(float)frames(), 0, 0);
+				}
+			},
+			new Anim(){
+				public int frames(){return 15;}
+				public void anim(OrthographicCamera cam, int step){
+					cam.position.add(0, (float)Gdx.graphics.getHeight()/(float)frames(), 0);
+				}
+			}
+		};
+	}
 	
 	public static String remove(String s){
 		char[] cs = s.toCharArray();

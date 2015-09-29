@@ -12,6 +12,7 @@ public class Spielsave extends SaveObjekt{
 	}
 	
 	public void create(String spielname, String[] para, String data){
+		getSave().disableAutoSave();
 		getSave().set("n", spielname);
 		String aus = "";
 		for(String s : para){
@@ -21,6 +22,7 @@ public class Spielsave extends SaveObjekt{
 		getSave().set("p", aus);
 		getSave().set("d", data);
 		getSave().set("t", Zeit.tag()+" "+Zeit.zeit());
+		getSave().save();
 	}
 	
 	public void register(){GameUtil.registerServer(getSave().get("p").split("-"), Spielhalle.get(getSave().get("n")), this);}

@@ -14,9 +14,9 @@ public class GameSzene <T> extends Szene{
 		super(b);
 	}
 
-	public void onRender(OrthographicCamera cam){
+	public void onRender(){
 		try{
-			super.onRender(cam);
+			super.onRender();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

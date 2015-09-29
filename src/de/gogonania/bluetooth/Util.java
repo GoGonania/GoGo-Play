@@ -39,34 +39,28 @@ public class Util implements ApplicationListener{
 	public void create(){
 		cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cam.position.set(Gdx.graphics.getWidth()/2F, Gdx.graphics.getHeight()/2F, 0);
+		cam.update();
 	}
 
 	public void render(){
 		if(szene == null) setSzene(new SzeneStartup(), null);
-		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT|GL20.GL_DEPTH_BUFFER_BIT);
 		
 		if(szene.isClosed()) szene.onOpen();
 		
 		if(next != null){
 			animstep++;
-			if(animstep <= anim.frames()){
-				anim.up(cam);
-				if(animstep == anim.frames()){
-					szene = next;
-				}
-			} else{
-				anim.down(cam);
-				if(anim.frames()*2 == animstep){
-					next = null;
-				}
+			anim.anim(szene.cam, animstep);
+			if(animstep >= anim.frames()){
+				szene = next;
+				next = null;
 			}
 		} else{
-			if(Szene.dialog == null && !isSwitching() && Gdx.input.isTouched() && Overlays.canScroll()){
-				if(lasty != -1) cam.translate(0, scroll*(Gdx.input.getY()-lasty));
+			if(Szene.dialog == null && !isSwitching() && Gdx.input.isTouched() && szene.canScroll() && Overlays.canScroll()){
+				if(lasty != -1) szene.cam.translate(0, scroll*(Gdx.input.getY()-lasty));
 				lasty = Gdx.input.getY();
-				if(cam.position.y > Gdx.graphics.getHeight()/2F) undoScroll();
-				if(cam.position.y < szene.getMaxY()) cam.position.y = szene.getMaxY();
+				if(szene.cam.position.y > Gdx.graphics.getHeight()/2F) undoScroll();
+				if(szene.cam.position.y < szene.getMaxY()) szene.cam.position.y = szene.getMaxY();
 			} else{
 				lasty = -1;
 			}
@@ -76,8 +70,15 @@ public class Util implements ApplicationListener{
 		
 		if(szene.isClosed()) szene.onOpen();
 		
-		cam.update();
-		szene.onRender(cam);
+		try{Szene.batch.begin();}catch(Exception e){e.printStackTrace(); return;}
+		Szene.batch.setProjectionMatrix(cam.combined);
+		Bilder.background.render(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		if(next != null) next.onRender();
+		szene.onRender();
+		Szene.batch.setProjectionMatrix(cam.combined);
+		if(Szene.dialog != null) Szene.dialog.render();
+		Overlays.render();
+		szene.batch.end();
 	}
 	
 	public static void ping(final String text, boolean t){
@@ -147,7 +148,7 @@ public class Util implements ApplicationListener{
 	public static PackageInfo getPackageInfo(){try{return MainActivity.getThis().getPackageManager().getPackageInfo(MainActivity.getThis().getPackageName(), 0);}catch (PackageManager.NameNotFoundException e){error(e);} return null;}
 	public static <T> T random(ArrayList<T> l){return l.get(random(0, l.size()-1));}
 	public static <T> T random(T[] l){return l[random(0, l.length-1)];}
-	public static void undoScroll(){cam.position.y = Gdx.graphics.getHeight()/2F;}
+	public static void undoScroll(){szene.cam.position.y = Gdx.graphics.getHeight()/2F;}
 	public static void refreshScreen(){setSzene(instanceCurrentScreen(), null);}
 	public static void setSzene(Szene s){setSzene(s, Registry.animations[0]);}
 	public static Szene getSzene(){return szene;}
@@ -159,7 +160,7 @@ public class Util implements ApplicationListener{
 	public static int random(int min, int max){return min + (int) Math.round(Math.random() * (max-min));}
 	public static void sleep(long time){if(time > 0 ){try{Thread.sleep(time);}catch(Exception e){}} else{}}
 	public static float getX(){return Gdx.input.getX();}
-	public static float getY(){return cam.unproject(new Vector3(0, Gdx.input.getY(), 0)).y;}
+	public static float getY(){return szene.cam.unproject(new Vector3(0, Gdx.input.getY(), 0)).y;}
 	public static void vibBig(){vib(100);}
 	public static void vib(){vib(30);}
 	private static void vib(long time){if(vib){MainActivity.getVibrator().vibrate(time);} else{}}

@@ -16,6 +16,7 @@ public class ClientGoGoKlicker extends SpielClient{
 		if(o instanceof PacketUpdate){
 			geld = ((PacketUpdate) o).geld;
 			a.progress = ((PacketUpdate) o).progress;
+			Background.add();
 		} else{
 			if(o instanceof PacketAddon){
 				a.onPacket((PacketAddon) o);

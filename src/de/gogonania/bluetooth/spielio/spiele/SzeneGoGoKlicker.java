@@ -47,6 +47,10 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker> implements An
 	public boolean chance(){
 		return false;
 	}
+
+	public boolean canScroll() {
+		return !cookie.isHovered(Gdx.input.isTouched());
+	}
 	
 	public SzeneGoGoKlicker(){
 		super(Bilder.background);
@@ -57,7 +61,6 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker> implements An
 		cookie = new Image(cookiesize/9F, Gdx.graphics.getHeight()-cookiesize-cookiesize/8F, cookiesize, cookiesize, Bilder.cookie){
 			public void click(){
 				Util.vib();
-				Background.add();
 				getClient().send(new PacketCookieClick());
 			}
 			public float getScale(){
@@ -86,7 +89,7 @@ public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker> implements An
 		};
 		
 		for(int i = 0; i < getClient().a.addons.size(); i++){
-			groups.add(new Group(g, getClient().a.addons.get(i), i));
+			groups.add(new Group(this, g, getClient().a.addons.get(i), i));
 		}
 		
 		update();

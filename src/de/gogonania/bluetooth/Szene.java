@@ -22,13 +22,13 @@ import de.gogonania.bluetooth.util.Bilder;
 public class Szene{
 	private boolean open;
 	private Bild background;
-	
+	public OrthographicCamera cam;
 	public static Dialog dialog;
+	
 	private static boolean clicked;
 	private static long last;
 	public static SpriteBatch batch;
 	private static FreeTypeFontGenerator generator;
-	
 	public static BitmapFont fontlittle;
 	public static BitmapFont fontnotification;
 	public static BitmapFont font;
@@ -39,6 +39,8 @@ public class Szene{
 	
 	public Szene(Bild c){
 		background = c;
+		cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		cam.position.set(Gdx.graphics.getWidth()/2F, Gdx.graphics.getHeight()/2F, 0);
 	}
 	
 	public static void init(){
@@ -58,31 +60,25 @@ public class Szene{
 	public void onBack(){}
 	public Anim getOpenAnimation(){return null;}
 	public Anim getCloseAnimation(){return null;}
+	public boolean canScroll(){return true;}
 	
 	public void onOpen(){
 		open = true;
 		open();
 	}
 	
-	public void onRender(OrthographicCamera cam){
+	public void onRender(){
+		cam.update();
 		batch.setProjectionMatrix(cam.combined);
-		try{batch.begin();}catch(Exception e){e.printStackTrace(); return;}
-		Vector3 v = cam.unproject(new Vector3(0, Gdx.graphics.getHeight(), 0));
 		
-		if(isClosed()) onOpen();
-		
-		background.render(0, v.y, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		
-		if(isClosed()) onOpen();
+		background.render(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		if(this instanceof AnimatedBackground && Util.b && !Util.isSwitching()) Background.render();
+		if(isClosed()) onOpen();
 		
 		renderObjekts();
 		render();
-		if(dialog != null) dialog.render();
-		Overlays.render();
 		onUpdate();
-		batch.end();
 	}
 	
 	public void onUpdate(){

@@ -30,10 +30,13 @@ public class ScreenSpielInfo extends ScreenBase{
 				}
 			}
 		});
-		
+		final Szene s = this;
 		GridText g = new GridText(){
 			public float getHeightMargin(){
 				return Gdx.graphics.getHeight()/3F;
+			}
+			public Szene getSzene(){
+				return s;
 			}
 		};
 		
