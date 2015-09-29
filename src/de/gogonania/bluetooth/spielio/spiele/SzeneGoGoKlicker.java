@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.Color;
 
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.gdx.AnimatedBackground;
-import de.gogonania.bluetooth.gdx.Background;
 import de.gogonania.bluetooth.io.GameUtil;
 import de.gogonania.bluetooth.objekte.Button;
 import de.gogonania.bluetooth.objekte.Image;
+import de.gogonania.bluetooth.objekte.Progress;
 import de.gogonania.bluetooth.objekte.Text;
 import de.gogonania.bluetooth.spielio.GameSzene;
 import de.gogonania.bluetooth.spielio.spiele.gogoklicker.Group;
@@ -18,7 +18,6 @@ import de.gogonania.bluetooth.spielio.spiele.gogoklicker.PacketUpgrade;
 import de.gogonania.bluetooth.util.Bild;
 import de.gogonania.bluetooth.util.Bilder;
 import de.gogonania.bluetooth.util.Grid;
-import de.gogonania.bluetooth.objekte.Progress;
 
 public class SzeneGoGoKlicker extends GameSzene<ClientGoGoKlicker> implements AnimatedBackground{
 	private Image cookie;

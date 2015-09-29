@@ -1,6 +1,4 @@
 package de.gogonania.bluetooth.spielio;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-
 import de.gogonania.bluetooth.Szene;
 import de.gogonania.bluetooth.Util;
 import de.gogonania.bluetooth.io.GameUtil;

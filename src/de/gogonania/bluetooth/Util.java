@@ -78,7 +78,7 @@ public class Util implements ApplicationListener{
 		Szene.batch.setProjectionMatrix(cam.combined);
 		if(Szene.dialog != null) Szene.dialog.render();
 		Overlays.render();
-		szene.batch.end();
+		Szene.batch.end();
 	}
 	
 	public static void ping(final String text, boolean t){
