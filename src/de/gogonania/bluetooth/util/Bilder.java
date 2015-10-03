@@ -27,14 +27,14 @@ public class Bilder{
 		logo = new Bild("logo.png");
 		bar = new Bild("bar.jpg");
 		
-		normal = new Bild(Color.valueOf("3399ff"));
-		cred = new Bild(Color.valueOf("dd3333"));
-		cgreen = new Bild(Color.valueOf("33dd33"));
-		cyellow = new Bild(Color.valueOf("ffff55"));
+		normal = new Bild(Color.valueOf("77aaff"));
+		cred = new Bild(Color.valueOf("dd4455"));
+		cgreen = new Bild(Color.valueOf("99e500"));
+		cyellow = new Bild(Color.valueOf("eeff66"));
 		clgray = new Bild(Color.valueOf("aaaaaa"));
 		cdgray = new Bild(Color.DARK_GRAY);
 		cwhite = new Bild(Color.WHITE);
-		corange = new Bild(Color.valueOf("ffa500"));
+		corange = new Bild(Color.valueOf("ffcc33"));
 		
 		cookie = new Bild("cookie.png");
 		cookiegold = new Bild("cookie_gold.png");

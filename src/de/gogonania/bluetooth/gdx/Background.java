@@ -63,6 +63,7 @@ public class Background {
 	}
 	
 	public static void add(){
+		if(!(Util.getSzene() instanceof AnimatedBackground)) return;
 		float s = get().getSize();
 		float size = Gdx.graphics.getWidth()/50F*s;
 		Item i = new Item();
